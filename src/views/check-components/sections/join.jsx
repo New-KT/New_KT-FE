@@ -107,7 +107,7 @@ const SignupForm = () => {
         
         setErrorMsg(""); // 비밀번호가 유효하면 오류 메시지를 지움
         
-        fetch("http://127.0.0.1:8000/api/register/", {
+        fetch("http://127.0.0.1:8000/users/register/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -22,7 +22,7 @@ const PageLogin = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        fetch("http://127.0.0.1:8000/api/token/", {
+        fetch("http://127.0.0.1:8000/users/login/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

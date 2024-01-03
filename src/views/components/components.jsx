@@ -6,10 +6,6 @@ import Header from "../../components/header/header.jsx";
 import HeaderBanner from "../../components/banner/banner.jsx";
 import Footer from "../../components/footer/footer.jsx";
 
-// sections for this page
-import Buttons from "./sections/buttons.jsx";
-
-
 const Components = () => {
     return (
         <div id="main-wrapper">
