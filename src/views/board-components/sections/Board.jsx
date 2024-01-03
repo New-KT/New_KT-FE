@@ -1,5 +1,10 @@
+// Board.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "reactstrap";
+
+import HeaderBanner6 from "../../../components/banner/banner6.jsx";
+import Footer from "../../../components/footer/footer.jsx";
 
 const Board = ({ idx, title, contents, createdBy }) => {
     const navigate = useNavigate();
@@ -33,22 +38,42 @@ const Board = ({ idx, title, contents, createdBy }) => {
     };
 
     const moveToList = () => {
-        navigate("/board");
+        window.location.replace("/board");
     };
 
     return (
         <div>
+            <HeaderBanner6 />
             <div>
                 <h2>{title}</h2>
                 <h5>{createdBy}</h5>
                 <hr />
                 <p>{contents}</p>
             </div>
-            <div>
-                <button onClick={moveToUpdate}>수정</button>
-                <button onClick={deleteBoard}>삭제</button>
-                <button onClick={moveToList}>목록</button>
+            <div className="text-center" style={{ marginTop: "30px" }}>
+                <Button
+                    type="update"
+                    onClick={moveToUpdate}
+                    className="btn btn-inverse waves-effect waves-light m-r-10"
+                >
+                    수정
+                </Button>
+                <Button
+                    type="delete"
+                    onClick={deleteBoard}
+                    className="btn btn-inverse waves-effect waves-light m-r-10"
+                >
+                    삭제
+                </Button>
+                <Button
+                    type="list"
+                    onClick={moveToList}
+                    className="btn btn-inverse waves-effect waves-light m-r-10"
+                >
+                    목록
+                </Button>
             </div>
+            <Footer />
         </div>
     );
 };

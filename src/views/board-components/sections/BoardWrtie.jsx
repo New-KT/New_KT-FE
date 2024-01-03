@@ -1,12 +1,12 @@
 /* BoardWrite.js */
 import React, { useState } from "react";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "reactstrap";
+import HeaderBanner6 from "../../../components/banner/banner6.jsx";
+import Footer from "../../../components/footer/footer.jsx";
 
 const BoardWrite = () => {
-    const navigate = useNavigate();
-
     const [board, setBoard] = useState({
         title: "",
         createdBy: "",
@@ -40,7 +40,7 @@ const BoardWrite = () => {
         })
         .then((data) => {
             alert("등록되었습니다.");
-            navigate("/board");
+            window.location.replace("/board");
         })
         .catch((error) => {
             console.error('Error saving board:', error.message);
@@ -48,50 +48,131 @@ const BoardWrite = () => {
     };
 
     const backToList = () => {
-        navigate("/board");
+        window.location.replace("/board");
     };
 
+    // return (
+    //     <div>
+    //         <div>
+    //             <span>제목</span>
+    //             <input
+    //                 type="text"
+    //                 name="title"
+    //                 value={title}
+    //                 onChange={onChange}
+    //             />
+    //         </div>
+    //         <br />
+    //         <div>
+    //             <span>작성자</span>
+    //             <input
+    //                 type="text"
+    //                 name="createdBy"
+    //                 value={createdBy}
+    //                 onChange={onChange}
+    //             />
+    //         </div>
+    //         <br />
+    //         <div>
+    //             <span>내용</span>
+    //             <textarea
+    //                 name="contents"
+    //                 cols="30"
+    //                 rows="10"
+    //                 value={contents}
+    //                 onChange={onChange}
+    //             ></textarea>
+    //         </div>
+    //         <br />
+    //         <div>
+    //             <Button className="btn btn-inverse waves-effect waves-light" onClick={saveBoard}>
+    //                 저장
+    //             </Button>
+    //             <Button className="btn btn-inverse waves-effect waves-light" onClick={backToList}>
+    //                 취소
+    //             </Button>
+    //         </div>
+    //     </div>
+    // );
     return (
         <div>
-            <div>
-                <span>제목</span>
-                <input
-                    type="text"
-                    name="title"
-                    value={title}
-                    onChange={onChange}
-                />
-            </div>
-            <br />
-            <div>
-                <span>작성자</span>
-                <input
-                    type="text"
-                    name="createdBy"
-                    value={createdBy}
-                    onChange={onChange}
-                />
-            </div>
-            <br />
-            <div>
-                <span>내용</span>
-                <textarea
-                    name="contents"
-                    cols="30"
-                    rows="10"
-                    value={contents}
-                    onChange={onChange}
-                ></textarea>
-            </div>
-            <br />
-            <div>
-                <Button className="btn btn-inverse waves-effect waves-light" onClick={saveBoard}>
-                    저장
-                </Button>
-                <Button className="btn btn-inverse waves-effect waves-light" onClick={backToList}>
-                    취소
-                </Button>
-            </div>
+            <HeaderBanner6 />
+                <div className="spacer" id="forms-component">
+                    <Container>
+                        <Row className="justify-content-center">
+                            <Col md="7" className="text-center">
+                                <h1 className="title font-bold">글쓰기</h1>
+                                <h6 className="subtitle">
+                                    Here you can check Demos we created based on
+                                    WrapKit. It's quite easy to create your own
+                                    dream website &amp; dashboard in no time.
+                                </h6>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+                <Container>
+                    <Row className="justify-content-center">
+                        <Col md="6" style={{ paddingBottom: "180px" }}>
+                            <Form>
+                                <FormGroup>
+                                    <Label htmlFor="createdBy">제목</Label>
+                                    <Input
+                                        type="text"
+                                        name="title"
+                                        value={title}
+                                        onChange={onChange}
+                                        className="form-control"
+                                        id="name"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label htmlFor="createdBy">작성자</Label>
+                                    <Input
+                                        type="text"
+                                        name="createdBy"
+                                        value={createdBy}
+                                        onChange={onChange}
+                                        className="form-control"
+                                        id="createdBy"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label htmlFor="createdBy">내용</Label>
+                                    <textarea
+                                        name="contents"
+                                        cols="30"
+                                        rows="10"
+                                        value={contents}
+                                        onChange={onChange}
+                                        className="form-control"
+                                        id="contents"
+                                    ></textarea>
+                                </FormGroup>
+                                
+                                <div className="text-center" style={{ marginTop: "30px" }}>
+                                    <Button
+                                        type="save"
+                                        onClick={saveBoard}
+                                        className="btn btn-success waves-effect waves-light m-r-10"
+                                    >
+                                        Save
+                                    </Button>
+                                    <Button
+                                        type="back"
+                                        onClick={backToList}
+                                        className="btn btn-inverse waves-effect waves-light m-r-10"
+                                    >
+                                        Back
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            <Footer />
         </div>
     );
 };
