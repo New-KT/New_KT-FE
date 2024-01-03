@@ -13,7 +13,7 @@ import {
 import logo from "../../assets/images/logos/New_KT_header.png";
 import LogoutButton from "./Logout.jsx";
 
-const HeaderBanner5 = () => {
+const HeaderBanner6 = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -46,8 +46,8 @@ const HeaderBanner5 = () => {
                                 </Link>
                             </NavItem>
                             <NavItem className="active">
-                                <Link to="/board" className="nav-link">
-                                    Community
+                                <Link to="/meeting" className="nav-link">
+                                    Meeting
                                 </Link>
                             </NavItem>
                             <NavItem className="active">
@@ -69,4 +69,4 @@ const HeaderBanner5 = () => {
     );
 };
 
-export default HeaderBanner5;
+export default HeaderBanner6;

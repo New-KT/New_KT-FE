@@ -57,6 +57,11 @@ const Header = () => {
                                     </Link>
                                 </NavItem>
                                 <NavItem>
+                                    <Link className="nav-link" to={"/board"}>
+                                        Community
+                                    </Link>
+                                </NavItem>
+                                <NavItem>
                                     <Link className="nav-link" to={"/about"}>
                                         About
                                     </Link>
