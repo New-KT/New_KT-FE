@@ -126,7 +126,7 @@ const MyCalendar = () => {
         const token = window.localStorage.getItem("token");
 
         // 서버에 삭제 요청 보내기
-        fetch(`http://127.0.0.1:8000/api/token/schedule/${eventId}`, {
+        fetch(`http://127.0.0.1:8000/schedule/eventdelete/${eventId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
