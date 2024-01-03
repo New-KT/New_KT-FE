@@ -8,7 +8,7 @@ import {
 const LogoutButton = () => {
     const onLogout = () => {
         const token = window.localStorage.getItem("token");
-        fetch("http://ec2-13-124-237-120.ap-northeast-2.compute.amazonaws.com:8000/logout/", {
+        fetch("http://127.0.0.1:8000/users/logout/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

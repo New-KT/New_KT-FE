@@ -48,7 +48,7 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${window.localStorage.getItem('token')}`,
+                "Authorization": `Token ${window.localStorage.getItem('token')}`,
             },
             body: JSON.stringify({
                 "title": eventTitle,
