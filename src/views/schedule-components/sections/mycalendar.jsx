@@ -108,6 +108,7 @@ const MyCalendar = () => {
                     article_link: eventDetails.article_link,
                     article_title: eventDetails.article_title,
                     memo: eventDetails.memo,
+                    files: eventDetails.files,
                 });
                 setEventModalOpen(true);
             })
@@ -193,6 +194,7 @@ const MyCalendar = () => {
                 eventArticleTitle={selectedEvent?.article_title}
                 eventMemo={selectedEvent?.memo}
                 meeting={selectedEvent?.meeting}
+                files={selectedEvent?.files}
                 onDelete={() => handleDeleteEvent(selectedEvent?.id)}
             />
         </div>

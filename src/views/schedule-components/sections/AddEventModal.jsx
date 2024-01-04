@@ -21,6 +21,11 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
     const [endTime, setEndTime] = useState("");
     const [meeting, setMeetingDay] = useState(false);
     const [eventMemo, setEventMemo] = useState("");
+    const [selectedFiles, setSelectedFiles] = useState(null);
+
+    const handleFileChange = (e) => {
+        setSelectedFiles(e.target.files);
+    };
 
     const handleSaveEvent = () => {
         // // Save the event data
@@ -44,6 +49,14 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
         // setEventMemo("");
         // onClose();
 
+        // 파일 업로드
+        const formData = new FormData();
+        if (selectedFiles) {
+            for (let i = 0; i < selectedFiles.length; i++) {
+                formData.append("file", selectedFiles[i]);
+            }
+        }
+
         fetch("http://127.0.0.1:8000/schedule/create/", {
             method: "POST",
             headers: {
@@ -56,6 +69,7 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
                 "end": meeting ? `${startEventDate}T${endTime}:00` : `${endEventDate}T00:00:00`,
                 "memo": eventMemo,
                 "meeting": meeting,
+                "file": formData,
             }),
         })
         .then(res => {
@@ -175,6 +189,18 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
                             onChange={(e) => setEventMemo(e.target.value)}
                         />
                     </FormGroup>
+
+                    <FormGroup className="mb-0">
+                        <Label for="fileInput">File Upload</Label>
+                        <Input
+                            type="file"
+                            id="fileInput"
+                            multiple
+                            onChange={handleFileChange}
+                        />
+                    </FormGroup>
+
+
                 </Form>
             </ModalBody>
 

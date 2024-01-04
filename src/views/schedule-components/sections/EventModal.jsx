@@ -44,6 +44,7 @@ const EventModal = ({
     eventArticleLink,
     eventMemo,
     meeting,
+    files,
 
     onDelete,
 }) => {
@@ -76,9 +77,33 @@ const EventModal = ({
         }
     };
 
+    const renderFiles = () => {
+        if (files && files.length > 0) {
+            return (
+                <div>
+                    <h3>Files</h3>
+                    <ul>
+                        {files.map((file, index) => (
+                            <li key={index}>
+                                <a
+                                    href={file.file_link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {file.file_name}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        } else {
+            return <p>No files available</p>;
+        }
+    };
+
     return (
         <Modal isOpen={isOpen} toggle={onClose} className="modal-xl">
-            {/* 추가된 className */}
             <ModalHeader toggle={onClose}>
                 <div className="fs-1">{eventTitle}</div>
                 <div className="fs-6">
@@ -115,6 +140,7 @@ const EventModal = ({
                     <h3>메모</h3>
                     <p>{eventMemo}</p>
                 </Row>
+                <Row>{renderFiles()}</Row>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={() => onDelete()}>
