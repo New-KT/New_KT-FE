@@ -23,21 +23,11 @@ import Login from "./views/check-components/check-components.jsx";
 import SignupForm from "./views/check-components/sections/join.jsx"
 import About from "./views/else-components/about.jsx";
 
-import BoardComponents from "./views/board-components/board-components.jsx";
-import BoardDetail from "./views/board-components/sections/BoardDetail.jsx";
-import BoardWrite from "./views/board-components/sections/BoardWrtie.jsx";
-import BoardUpdate from "./views/board-components/sections/BoardUpdate.jsx";
-
 function App() {
   return (
     <Routes>
       <Route path="/meeting" element={<MeetingComponents />} />
       <Route path="/schedule" element={<ScheduleComponents />} />
-      <Route path="/board" element={<BoardComponents />} />
-      <Route path="/board/:idx" element={<BoardDetail />} />
-      <Route path="/write" element={<BoardWrite />} />
-      <Route path="/update/:idx" element={<BoardUpdate />} />
-
       <Route path="/signup" element={<SignupForm />} />
       <Route path="/signin" element={<Login />} />
       <Route path="/about" element={<About />} />

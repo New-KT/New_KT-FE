@@ -46,11 +46,6 @@ const HeaderBanner4 = () => {
                                 </Link>
                             </NavItem>
                             <NavItem className="active">
-                                <Link to="/board" className="nav-link">
-                                    Community
-                                </Link>
-                            </NavItem>
-                            <NavItem className="active">
                                 <Link to="/about" className="nav-link">
                                     About
                                 </Link>
