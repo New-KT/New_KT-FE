@@ -7,10 +7,8 @@ import HeaderBanner6 from "../../../components/banner/banner6.jsx";
 import Footer from "../../../components/footer/footer.jsx";
 
 const Board = ({ idx, title, contents, createdBy }) => {
-    const navigate = useNavigate();
-
     const moveToUpdate = () => {
-        navigate("/update/" + idx);
+        window.location.replace(`/update/${idx}`);
     };
 
     const deleteBoard = () => {
@@ -29,7 +27,7 @@ const Board = ({ idx, title, contents, createdBy }) => {
                 })
                 .then((data) => {
                     alert("삭제되었습니다.");
-                    navigate("/board");
+                    window.location.replace('/board');
                 })
                 .catch((error) => {
                     console.error("Error deleting board:", error.message);

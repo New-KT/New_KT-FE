@@ -13,7 +13,7 @@ const BoardDetail = () => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Token ${window.localStorage.getItem('token')}`,
+                Authorization: `Token ${window.localStorage.getItem("token")}`,
             },
         })
             .then((response) => {
@@ -23,6 +23,7 @@ const BoardDetail = () => {
                 return response.json();
             })
             .then((data) => {
+                console.log("Board data from the server:", data.data); // 확인을 위한 로그
                 setBoard(data.data);
                 setLoading(false);
             })
@@ -33,6 +34,7 @@ const BoardDetail = () => {
     };
 
     useEffect(() => {
+        console.log("Component mounted with idx:", idx);
         getBoard();
     }, [idx]); // Ensure useEffect re-runs when the 'idx' changes
 
