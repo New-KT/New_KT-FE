@@ -7,6 +7,7 @@ import HeaderBanner5 from "../../components/banner/banner5.jsx";
 import Footer from "../../components/footer/footer.jsx";
 
 // sections for this page
+import VoiceButton from "./sections/meeting.jsx";
 
 const MeetingComponents = () => {
     return (
@@ -16,6 +17,7 @@ const MeetingComponents = () => {
                     <HeaderBanner5 />
                     {/* <PageCalendar /> */}
                     {/* <TeamComponent /> */}
+                    <VoiceButton />
                 </div>
             </div>
             <Footer />
