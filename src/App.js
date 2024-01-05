@@ -23,6 +23,8 @@ import Login from "./views/check-components/check-components.jsx";
 import SignupForm from "./views/check-components/sections/join.jsx"
 import About from "./views/else-components/about.jsx";
 
+window.Buffer = window.Buffer || require('buffer').Buffer;
+
 function App() {
   return (
     <Routes>

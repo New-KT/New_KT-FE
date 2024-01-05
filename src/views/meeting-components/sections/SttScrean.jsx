@@ -1,68 +1,142 @@
-// import Recorder from "./Recorder";
+import React, { useState, useEffect } from "react";
+
+const getUserMedia = navigator.mediaDevices.getUserMedia;
+
+
+const SttScreen = () => {
+    const [audioStream, setAudioStream] = useState(null);
+    const [isStreaming, setIsStreaming] = useState(false);
+
+    const startStreaming = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+            });
+
+            const socket = new WebSocket("ws://localhost:3000");
+
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            // setAudioStream(stream);
+            const microphone = audioContext.createMediaStreamSource(stream);
+
+            // WebRTC 설정
+            const peerConnection = new RTCPeerConnection();
+            // peerConnection.addTrack(microphone);
+            peerConnection.addTrack(stream.getAudioTracks()[0]);
+
+            socket.addEventListener("open", () => {
+                // WebRTC 연결 시작
+                peerConnection
+                    .createOffer()
+                    .then((offer) => peerConnection.setLocalDescription(offer))
+                    .then(() =>
+                        socket.send(
+                            JSON.stringify({
+                                type: "offer",
+                                offer: peerConnection.localDescription,
+                            })
+                        )
+                    );
+            });
+
+            socket.addEventListener("message", (event) => {
+                const data = JSON.parse(event.data);
+
+                if (data.type === "answer") {
+                    // 서버로부터 받은 응답 처리
+                    peerConnection.setRemoteDescription(
+                        new RTCSessionDescription(data.answer)
+                    );
+                }
+            });
+
+            setIsStreaming(true);
+        } catch (error) {
+            console.error("Error accessing microphone:", error);
+        }
+    };
+
+    const stopStreaming = () => {
+        if (audioStream) {
+            // 오디오 스트림 중지
+            audioStream.getTracks().forEach((track) => track.stop());
+            setAudioStream(null);
+        }
+
+        setIsStreaming(false);
+    };
+
+    const handleButtonClick = () => {
+        if (isStreaming) {
+            stopStreaming();
+        } else {
+            startStreaming();
+        }
+    };
+
+    useEffect(() => {
+        // 컴포넌트 언마운트 시 오디오 스트림 중지
+        return () => {
+            if (isStreaming) {
+                stopStreaming();
+            }
+        };
+    }, []);
+
+    return (
+        <div>
+            <h1>SttScreen</h1>
+            <button onClick={handleButtonClick}>
+                {isStreaming ? "Stop Streaming" : "Start Streaming"}
+            </button>
+            {/* 추가적인 UI 혹은 상태 표시를 위한 부분 */}
+        </div>
+    );
+};
+
+export default SttScreen;
+
 
 // const SttScreen = () => {
- 
-//     const inputText = useSelector(state => state.stt.inputText);
-//     const isPlaying = useSelector(state => state.stt.isPlaying);
-//     const dispatch = useDispatch();
- 
-//     // ws
-//     const [recorder] = useState(() => new Recorder());
- 
-//     const handleText = (text) => {
-//         dispatch(setInputText(text));
-//     }
-    
-//     const handleBtn = useCallback(event => {
-//         dispatch(setIsPlaying(!isPlaying));
- 
-//         if (isPlaying) {
-//             recorder.stop();
-//         } else {
-//             dispatch(setInputText(""));
-//             recorder.start();
+//     const [audioStream, setAudioStream] = useState(null);
+//     const [isStreaming, setIsStreaming] = useState(false);
+
+//     const socket = new WebSocket("ws://localhost:3000");
+
+//     // 실시간으로 음성을 받아서 BE로 전송 - websocket
+//     const startStreaming = async () => {
+//         try {
+//             const stream = await getUserMedia({ audio: true, video: false });
+//             const audioStream = audioContext.createMediaStreamSource(stream);
+//             setAudioStream(audioStream);
+
+//             audioStream.connect(audioContext.destination);
+//             audioStream.connect(socket);
+
+//             setIsStreaming(true);
+//         } catch (err) {
+//             console.log('마이크에 접근하는 중 오류 발생:', err);
 //         }
-//     }, [isPlaying]);
-    
-//     useEffect(() => {
-//         recorder.init({
-//             path : scenario.url,
-//             // 녹음 시작
-//             onStart : function(event) {
-//                 console.log("녹음 시작 : 마이크 on 해줄것");
-//                 setSequence({
-//                     segments : [0, 60],
-//                     forceFlag : false,
-//                 })
-//                 dispatch(setIsPlaying(true));
-//             },
-//             // 인식된 결과 전달받음
-//             onResult : function(text, isRepeat) {
-//                 console.log("결과 받았음 : 화면에 추가해줄것");
-//                 dispatch(setInputText(text));
-//             },
-//             // 종결 전달 받음
-//             onClose : function(event) {
-//                 console.log("결과 전달 끝났음 : 마이크 off 해줄것");
-//                 setSequence({
-//                     segments : [0, 1],
-//                     forceFlag : false,
-//                 })
-//                 dispatch(setIsPlaying(false));
-//             },
-//             // 에러 발생
-//             onError : function(event) {
-//                 toastError("서버와의 연결을 실패하였습니다.");
-//             }
-//         });
-//     }, []);
- 
+//     }
+
+//     // 음성 전송 중지
+//     const stopStreaming = () => {
+//         if (audioStream) {
+//             audioStream.disconnect(audioContext.destination);
+//             audioStream.disconnect(socket);
+//             setAudioStream(null);
+//         }
+//         setIsStreaming(false);
+//     };
+
 //     return (
-//         <>
-//             <textarea text={inputText} onChange={(text) => {handleText(text)}} />
-//             <button onClick={() => handleBtn()} />
-//         </>
+//         <div>
+//             <h1>SttScreen</h1>
+//             <button onClick={isStreaming ? stopStreaming : startStreaming}>
+//                 {isStreaming ? '스트리밍 중지' : '스트리밍 시작'}
+//             </button>
+//         </div>
 //     )
 // }
- 
+
 // export default SttScreen;

@@ -19,8 +19,9 @@ const MeetingComponents = () => {
                     <HeaderBanner5 />
                     {/* <PageCalendar /> */}
                     {/* <TeamComponent /> */}
-                    <VoiceButton />
-                    <VttMic />
+                    {/* <VoiceButton /> */}
+                    {/* <VttMic /> */}
+                    <SttScreen />
                 </div>
             </div>
             <Footer />
