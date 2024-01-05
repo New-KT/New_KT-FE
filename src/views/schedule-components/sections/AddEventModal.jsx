@@ -28,59 +28,41 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
     };
 
     const handleSaveEvent = () => {
-        // // Save the event data
-        // const newEvent = {
-        //     title: eventTitle,
-        //     start: meeting ? `${startEventDate}T${startTime}:00` : startEventDate,
-        //     end: meeting ? `${startEventDate}T${endTime}:00` : endEventDate,
-        //     memo: eventMemo,
-        //     meeting: meeting,
-        // };
-        // onSave(newEvent);
-        // console.log("newEvent:", newEvent);
-
-        // // Reset the form and close the modal
-        // setEventTitle("");
-        // setStartEventDate("");
-        // setStartTime("");
-        // setEndEventDate("");
-        // setEndTime("");
-        // setMeetingDay(false);
-        // setEventMemo("");
-        // onClose();
-
         // 파일 업로드
         const formData = new FormData();
+    
         if (selectedFiles) {
             for (let i = 0; i < selectedFiles.length; i++) {
                 formData.append("file", selectedFiles[i]);
             }
         }
-
+    
+        formData.append("title", eventTitle);
+        formData.append("start", meeting ? `${startEventDate}T${startTime}:00` : `${startEventDate}T00:00:00`);
+        formData.append("end", meeting ? `${startEventDate}T${endTime}:00` : `${endEventDate}T00:00:00`);
+        formData.append("memo", eventMemo);
+        formData.append("meeting", meeting);
+    
+        const headers = {
+            "Authorization": `Token ${window.localStorage.getItem('token')}`,
+            "Content-Type": "multipart/form-data",
+        };
+    
         fetch("http://127.0.0.1:8000/schedule/create/", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${window.localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify({
-                "title": eventTitle,
-                "start": meeting ? `${startEventDate}T${startTime}:00` : `${startEventDate}T00:00:00`,
-                "end": meeting ? `${startEventDate}T${endTime}:00` : `${endEventDate}T00:00:00`,
-                "memo": eventMemo,
-                "meeting": meeting,
-                "file": formData,
-            }),
+            headers: headers,
+            body: formData,
         })
         .then(res => {
             if (res.status !== 201) {
                 throw Error(res);
-            } return res.json();
+            }
+            return res.json();
         })
         .then(newEvent => {
             onSave(newEvent);
             console.log("newEvent:", newEvent);
-
+    
             // Reset the form and close the modal
             setEventTitle("");
             setStartEventDate("");
@@ -89,15 +71,17 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
             setEndTime("");
             setMeetingDay(false);
             setEventMemo("");
+            setSelectedFiles(null);
             onClose();
-
+    
             // 페이지를 새로고침
             window.location.reload();
         })
         .catch((err) => {
             console.error(err);
-        })
+        });
     };
+    
 
     return (
         <Modal isOpen={isOpen} toggle={onClose}>

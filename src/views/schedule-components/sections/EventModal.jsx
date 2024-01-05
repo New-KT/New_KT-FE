@@ -77,49 +77,24 @@ const EventModal = ({
         }
     };
 
-    // const renderFiles = () => {
-    //     if (files && files.length > 0) {
-    //         return (
-    //             <div>
-    //                 <h3>Files</h3>
-    //                 <ul>
-    //                     {files.map((file, index) => (
-    //                         <li key={index}>
-    //                             <a
-    //                                 href={file.file_link}
-    //                                 target="_blank"
-    //                                 rel="noopener noreferrer"
-    //                             >
-    //                                 {file.file_name}
-    //                             </a>
-    //                         </li>
-    //                     ))}
-    //                 </ul>
-    //             </div>
-    //         );
-    //     } else {
-    //         return <p>No files available</p>;
-    //     }
-    // };
     const renderFiles = () => {
         if (files && files.length > 0) {
             return (
                 <div>
-                    <h3>Files</h3>
                     <ul>
                         {files.map((file, index) => (
                             <li key={index}>
-                                {/* If the file is an image, provide a link for preview */}
-                                {file.file_type.startsWith("image/") ? (
-                                    <a href={file.file_link} target="_blank" rel="noopener noreferrer">
-                                        <img src={file.file_link} alt={file.file_name} style={{ maxWidth: "100px" }} />
+                                <div>
+                                    <h5>{file.file_name}</h5>
+                                    <a
+                                        href={file.file_link}
+                                        download={file.file_name}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Download
                                     </a>
-                                ) : (
-                                    // Otherwise, provide a link for download
-                                    <a href={file.file_link} download={file.file_name} target="_blank" rel="noopener noreferrer">
-                                        {file.file_name}
-                                    </a>
-                                )}
+                                </div>
                             </li>
                         ))}
                     </ul>
@@ -168,7 +143,10 @@ const EventModal = ({
                     <h3>메모</h3>
                     <p>{eventMemo}</p>
                 </Row>
-                <Row>{renderFiles()}</Row>
+                <Row>
+                    <h3>파일</h3>
+                    {renderFiles()}
+                </Row>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={() => onDelete()}>

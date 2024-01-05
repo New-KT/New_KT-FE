@@ -84,13 +84,12 @@ const MyCalendar = () => {
     const handleEventClick = (clickInfo) => {
         const { event } = clickInfo;
         const eventId = parseInt(event._def.publicId);
-        const token = window.localStorage.getItem("token");
 
         fetch(`eventclick/${eventId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
+                Authorization: `Token ${window.localStorage.getItem("token")}`,
             },
         })
             .then((res) => {
@@ -100,7 +99,7 @@ const MyCalendar = () => {
                 return res.json();
             })
             .then((eventDetails) => {
-                // 클릭한 이벤트 객체에 서버에서 가져온 추가 정보를 추가하여 modal 상태를 업데이트
+                // 클릭한 이벤트 객체에 서버에서 가져온 추가 정보를 추가
                 setSelectedEvent({
                     ...event,
                     keyword: eventDetails.keyword,
@@ -110,6 +109,36 @@ const MyCalendar = () => {
                     memo: eventDetails.memo,
                     files: eventDetails.files,
                 });
+
+                // 파일이 존재하는 경우 블롭 객체를 가져와서 files 배열에 추가
+                if (eventDetails.files && eventDetails.files.length > 0) {
+                    const filePromises = eventDetails.files.map((file) => {
+                        return fetch(`${serverUrl}/${file.file_link}`)
+                            .then((res) => res.blob())
+                            .then((blob) => {
+                                // 여기에서 블롭 객체를 사용하거나 저장할 수 있습니다.
+                                console.log("Blob:", blob);
+                                return {
+                                    ...file,
+                                    blob: blob, // 블롭 객체를 files 배열에 추가
+                                };
+                            });
+                    });
+
+                    // 모든 파일의 블롭 객체가 준비될 때까지 기다린 후 모달 상태를 업데이트
+                    Promise.all(filePromises)
+                        .then((updatedFiles) => {
+                            // 모든 파일의 블롭 객체가 준비되면 모달 상태를 업데이트
+                            setSelectedEvent((prevEvent) => ({
+                                ...prevEvent,
+                                files: updatedFiles,
+                            }));
+                            console.log("All files processed.");
+                        })
+                        .catch((error) => {
+                            console.error("Error processing files:", error);
+                        });
+                }
                 setEventModalOpen(true);
             })
             .catch((err) => {
