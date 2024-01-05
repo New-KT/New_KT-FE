@@ -10,6 +10,7 @@ import Footer from "../../components/footer/footer.jsx";
 import VoiceButton from "./sections/meeting.jsx";
 import VttMic from "./sections/VttMic.jsx";
 import SttScreen from "./sections/SttScrean.jsx";
+import Voice from "./sections/meeting.jsx";
 
 const MeetingComponents = () => {
     return (
@@ -21,7 +22,8 @@ const MeetingComponents = () => {
                     {/* <TeamComponent /> */}
                     {/* <VoiceButton /> */}
                     {/* <VttMic /> */}
-                    <SttScreen />
+                    {/* <SttScreen /> */}
+                    <Voice />
                 </div>
             </div>
             <Footer />
