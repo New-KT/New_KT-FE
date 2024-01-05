@@ -8,6 +8,8 @@ import Footer from "../../components/footer/footer.jsx";
 
 // sections for this page
 import VoiceButton from "./sections/meeting.jsx";
+import VttMic from "./sections/VttMic.jsx";
+import SttScreen from "./sections/SttScrean.jsx";
 
 const MeetingComponents = () => {
     return (
@@ -18,6 +20,7 @@ const MeetingComponents = () => {
                     {/* <PageCalendar /> */}
                     {/* <TeamComponent /> */}
                     <VoiceButton />
+                    <VttMic />
                 </div>
             </div>
             <Footer />
