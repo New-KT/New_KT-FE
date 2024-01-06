@@ -13,23 +13,22 @@ const HeaderBanner = () => {
                         md="6"
                         className="align-self-center text-center"
                     >
-                        {/* <h1 className="title" style={{ marginTop: "50px" }}>
+                        <h1 className="title" style={{ marginTop: "50px" }}>
                             New KT
-                        </h1> */}
-                        <div class="main_slogan">
+                        </h1>
+                        {/* <div class="main_slogan">
                             <p>
-                                <span class="bgtext" data-text="IN">
-                                    "IN" ::after
+                                <span class='bgtext' data-text="IN">
+                                    "IN"
+                                    ::after
                                 </span>
                                 <span class="stroke">SIGHT,</span>
                             </p>
                             <p>
-                                <span class="bgtext" data-text="NER">
-                                    NER
-                                </span>
+                                <span class="bgtext" data-text="NER">NER</span>
                                 <span class="stroke">VE,</span>
                             </p>
-                        </div>
+                        </div> */}
                         <h4 className="subtitle font-light">
                             A tool to conduct your meetings more efficiently.
                             <br /> " New Keyword Tool "
