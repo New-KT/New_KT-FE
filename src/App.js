@@ -27,8 +27,8 @@ function App() {
     <Routes>
       <Route path="/meeting" element={<MeetingComponents />} />
       <Route path="/schedule" element={<ScheduleComponents />} />
-      <Route path="/join" element={<SignupForm />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignupForm />} />
+      <Route path="/signin" element={<Login />} />
       <Route path="/about" element={<About />} />
       <Route path="/home" element={<HomeComponents />} />
       <Route path="/" element={<Components />} />
