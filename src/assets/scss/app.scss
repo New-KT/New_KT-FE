@@ -76,14 +76,27 @@ Headings
 *******************/
 
 h1,
-h2,
+h2 {
+    color: $headingtext;
+    font-family: $headingfont;
+}
+
 h3,
 h4,
 h5,
 h6 {
-    color: $headingtext;
-    font-family: $headingfont;
+    font-family: 'Noto Sans KR', 'Pretendard', 'malgun gothic', dotum, sans-serif;
 }
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//     color: $headingtext;
+//     font-family: $headingfont;
+// }
 
 h1 {
     line-height: 40px;
