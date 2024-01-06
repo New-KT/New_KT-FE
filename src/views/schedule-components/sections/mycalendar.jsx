@@ -113,7 +113,7 @@ const MyCalendar = () => {
                 // 파일이 존재하는 경우 블롭 객체를 가져와서 files 배열에 추가
                 if (eventDetails.files && eventDetails.files.length > 0) {
                     const filePromises = eventDetails.files.map((file) => {
-                        return fetch(`${serverUrl}/${file.file_link}`)
+                        return fetch(`/${file.file_link}`)
                             .then((res) => res.blob())
                             .then((blob) => {
                                 // 여기에서 블롭 객체를 사용하거나 저장할 수 있습니다.
