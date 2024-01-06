@@ -1,4 +1,4 @@
-//meetimg-components.jsx
+// summary-components.jsx
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -7,8 +7,7 @@ import HeaderBanner5 from "../../components/banner/banner5.jsx";
 import Footer from "../../components/footer/footer.jsx";
 
 // sections for this page
-import VoiceButton from "./sections/meeting.jsx";
-import Voice from "./sections/Voice.jsx";
+import MeetingSummary from "./sections/meeting-summary.jsx";
 
 const MeetingComponents = () => {
     return (
@@ -16,8 +15,8 @@ const MeetingComponents = () => {
             <div className="page-wrapper">
                 <div className="container-fluid">
                     <HeaderBanner5 />
-                    {/* <VoiceButton /> */}
-                    <Voice />
+                    <MeetingSummary />
+                    
                 </div>
             </div>
             <Footer />

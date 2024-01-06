@@ -18,6 +18,7 @@ import Components from "./views/components/components.jsx";
 import HomeComponents from "./views/components/home-components.jsx";
 import ScheduleComponents from "./views/schedule-components/schedule-components.jsx";
 import MeetingComponents from "./views/meeting-components/meeting-components.jsx";
+import SummaryComponents from "./views/meeting-components/summary-components.jsx";
 
 import Login from "./views/check-components/check-components.jsx";
 import SignupForm from "./views/check-components/sections/join.jsx"
@@ -29,6 +30,7 @@ function App() {
   return (
     <Routes>
       <Route path="/meeting" element={<MeetingComponents />} />
+      <Route path="/summary" element={<SummaryComponents />} />
       <Route path="/schedule" element={<ScheduleComponents />} />
       <Route path="/signup" element={<SignupForm />} />
       <Route path="/signin" element={<Login />} />
