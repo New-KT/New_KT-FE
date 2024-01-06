@@ -32,7 +32,7 @@ const HeaderBanner2 = () => {
             return res.json();
         })
         .then(now_event => {
-            setSchedule(now_event);
+            setSchedule([now_event]);
             console.log("now_event:", now_event);
         })
         .catch((err) => {
