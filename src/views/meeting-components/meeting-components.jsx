@@ -1,4 +1,4 @@
-//schedule-components.jsx
+//meetimg-components.jsx
 import React from "react";
 import PropTypes from "prop-types";
 
