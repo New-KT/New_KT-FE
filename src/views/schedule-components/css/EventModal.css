@@ -8,3 +8,16 @@
 .event-title-link:hover {
     color: blue; /* Change color to blue on hover */
 }
+
+.keyword-item {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.keyword-item.selected {
+    font-weight: bold;
+}
+
+.keyword-item.hovered {
+    color: blue;
+}

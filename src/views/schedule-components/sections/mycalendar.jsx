@@ -18,52 +18,96 @@ const MyCalendar = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     const [events, setEvents] = useState([]);
+    // const [events, setEvents] = useState([
+    //     {
+    //         id: 23,
+    //         title: "회의",
+    //         memo: "회의 준비",
+    //         start: "2024-01-07T09:00:38",
+    //         end: "2024-01-07T09:40:38",
+    //         meeting: true,
+    //         keywords: [
+    //             {
+    //                 keyword: "통신",
+    //                 article_links: [
+    //                     "https://n.news.naver.com/mnews/article/006/0000121642?sid=102",
+    //                     "https://n.news.naver.com/mnews/article/003/0012302733?sid=101",
+    //                     "https://n.news.naver.com/mnews/article/001/0014424528?sid=104"
+    //                 ],
+    //                 article_titles: [
+    //                     "민주당, 류희림 방송통신심의위원장 검찰 고발",
+    //                     "KT·SK 이어 LGU+도 '스타링크' 와 손잡을 듯…저궤도 위성통신 서비스 '초읽...",
+    //                     "스페이스X, 첫 '휴대전화 연결' 위성 발사…8개국 통신사와 제휴"
+    //                 ]
+    //             },
+    //             {
+    //                 keyword: " 블루스",
+    //                 article_links: [
+    //                     "https://n.news.naver.com/mnews/article/018/0005649603?sid=103",
+    //                     "https://n.news.naver.com/mnews/article/047/0002417742?sid=106",
+    //                     "https://n.news.naver.com/mnews/article/296/0000072937?sid=103"
+    //                 ],
+    //                 article_titles: [
+    //                     "원로 연극인 위한 축제 '제8회 늘푸른연극제' 6일 개막",
+    //                     "녹슬지 않고 금맥을 캐는 아티스트 닐 영의 음반 '주마' [B메이저 - AZ 록 여...",
+    //                     "&quot;열심히 살았는데&quot;...연말에 몰려오는 우울감, 왜?"
+    //                 ]
+    //             }
+    //         ],
+    //         summary: "회의 요약"
+    //     },
+    //     {
+    //         id: 24,
+    //         title: "회의",
+    //         memo: "회의 준비",
+    //         start: "2024-01-07",
+    //         end: "2024-01-11",
+    //         meeting: false,
+    //     }
+    // ]);
 
     useEffect(() => {
-        const token = window.localStorage.getItem("token");
-
-        if (token) {
-            fetch("http://127.0.0.1:8000/schedule/", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Token ${token}`, // 토큰을 Authorization 헤더에 포함
-                },
+        fetch("http://127.0.0.1:8000/schedule/", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${window.localStorage.getItem('token')}`,
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                return res.json();
             })
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((now_event) => {
-                    // 서버에서 받은 데이터가 배열인지 확인
-                    if (Array.isArray(now_event.events)) {
-                        // 데이터를 FullCalendar의 형식에 맞게 가공
-                        const formattedEvents = now_event.events.map(
-                            (event) => ({
-                                id: event.id,
-                                title: event.title,
-                                start: event.start,
-                                end: event.end,
-                                meeting: event.meeting,
-                            })
-                        );
+            .then((now_event) => {
+                // 서버에서 받은 데이터가 배열인지 확인
+                if (Array.isArray(now_event.events)) {
+                    // 데이터를 FullCalendar의 형식에 맞게 가공
+                    const formattedEvents = now_event.events.map(
+                        (event) => ({
+                            id: event.id,
+                            title: event.title,
+                            start: event.start,
+                            end: event.end,
+                            meeting: event.meeting,
+                        })
+                    );
 
-                        // 가공한 데이터를 FullCalendar에 설정
-                        setEvents(formattedEvents);
-                        console.log("formattedEvents:", formattedEvents);
-                    } else {
-                        console.error(
-                            "Received data does not contain an array of events:",
-                            now_event
-                        );
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        }
+                    // 가공한 데이터를 FullCalendar에 설정
+                    setEvents(formattedEvents);
+                    console.log("formattedEvents:", formattedEvents);
+                } else {
+                    console.error(
+                        "Received data does not contain an array of events:",
+                        now_event
+                    );
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+        
     }, []);
 
     const handleAddButton = () => {
@@ -92,66 +136,59 @@ const MyCalendar = () => {
                 Authorization: `Token ${window.localStorage.getItem("token")}`,
             },
         })
-            .then((res) => {
-                if (res.status !== 200) {
-                    throw Error(res);
-                }
-                return res.json();
-            })
-            .then((eventDetails) => {
-                // 클릭한 이벤트 객체에 서버에서 가져온 추가 정보를 추가
-                setSelectedEvent({
-                    ...event,
-                    keyword: eventDetails.keyword,
-                    summary: eventDetails.summary,
-                    article_link: eventDetails.article_link,
-                    article_title: eventDetails.article_title,
-                    memo: eventDetails.memo,
-                    files: eventDetails.files,
-                });
-
-                // 파일이 존재하는 경우 블롭 객체를 가져와서 files 배열에 추가
-                if (eventDetails.files && eventDetails.files.length > 0) {
-                    const filePromises = eventDetails.files.map((file) => {
-                        return fetch(`/${file.file_link}`)
-                            .then((res) => res.blob())
-                            .then((blob) => {
-                                // 여기에서 블롭 객체를 사용하거나 저장할 수 있습니다.
-                                console.log("Blob:", blob);
-                                return {
-                                    ...file,
-                                    blob: blob, // 블롭 객체를 files 배열에 추가
-                                };
-                            });
-                    });
-
-                    // 모든 파일의 블롭 객체가 준비될 때까지 기다린 후 모달 상태를 업데이트
-                    Promise.all(filePromises)
-                        .then((updatedFiles) => {
-                            // 모든 파일의 블롭 객체가 준비되면 모달 상태를 업데이트
-                            setSelectedEvent((prevEvent) => ({
-                                ...prevEvent,
-                                files: updatedFiles,
-                            }));
-                            console.log("All files processed.");
-                        })
-                        .catch((error) => {
-                            console.error("Error processing files:", error);
-                        });
-                }
-                setEventModalOpen(true);
-            })
-            .catch((err) => {
-                console.error(err);
+        .then((res) => {
+            if (res.status !== 200) {
+                throw Error(res);
+            }
+            return res.json();
+        })
+        .then((eventDetails) => {
+            // 클릭한 이벤트 객체에 서버에서 가져온 추가 정보를 추가
+            setSelectedEvent({
+                ...event,
+                keywords: eventDetails.keywords,
+                summary: eventDetails.summary,
+                memo: eventDetails.memo,
+                files: eventDetails.files,
             });
+
+            // // 파일이 존재하는 경우 블롭 객체를 가져와서 files 배열에 추가
+            // if (eventDetails.files && eventDetails.files.length > 0) {
+            //     const filePromises = eventDetails.files.map((file) => {
+            //         return fetch(`/${file.file_link}`)
+            //             .then((res) => res.blob())
+            //             .then((blob) => {
+            //                 // 여기에서 블롭 객체를 사용하거나 저장할 수 있습니다.
+            //                 console.log("Blob:", blob);
+            //                 return {
+            //                     ...file,
+            //                     blob: blob, // 블롭 객체를 files 배열에 추가
+            //                 };
+            //             });
+            //     });
+
+            //     // 모든 파일의 블롭 객체가 준비될 때까지 기다린 후 모달 상태를 업데이트
+            //     Promise.all(filePromises)
+            //         .then((updatedFiles) => {
+            //             // 모든 파일의 블롭 객체가 준비되면 모달 상태를 업데이트
+            //             setSelectedEvent((prevEvent) => ({
+            //                 ...prevEvent,
+            //                 files: updatedFiles,
+            //             }));
+            //             console.log("All files processed.");
+            //         })
+            //         .catch((error) => {
+            //             console.error("Error processing files:", error);
+            //         });
+            // }
+            setEventModalOpen(true);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
     };
 
-    // // 이벤트 삭제 함수
-    // const handleDeleteEvent = (eventId) => {
-    //     setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
-    //     setEventModalOpen(false); // 모달을 닫을 수도 있습니다.
-    // };
-    // 이벤트 삭제 함수
+
     const handleDeleteEvent = (eventId) => {
         const token = window.localStorage.getItem("token");
 
@@ -163,22 +200,22 @@ const MyCalendar = () => {
                 Authorization: `Token ${token}`,
             },
         })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! Status: ${res.status}`);
-                }
-                // 서버에서 삭제가 성공적으로 이루어졌을 때 클라이언트에서도 해당 이벤트를 제거
-                setEvents((prevEvents) =>
-                    prevEvents.filter((event) => event.id !== eventId)
-                );
-                setEventModalOpen(false); // 모달을 닫을 수도 있습니다.
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            // 서버에서 삭제가 성공적으로 이루어졌을 때 클라이언트에서도 해당 이벤트를 제거
+            setEvents((prevEvents) =>
+                prevEvents.filter((event) => event.id !== eventId)
+            );
+            setEventModalOpen(false); // 모달을 닫을 수도 있습니다.
 
-                // 페이지를 새로고침
-                window.location.reload();
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+            // 페이지를 새로고침
+            window.location.reload();
+        })
+        .catch((err) => {
+            console.error(err);
+        });
     };
 
     return (
@@ -217,12 +254,10 @@ const MyCalendar = () => {
                 eventTitle={selectedEvent?.title}
                 eventStartDate={selectedEvent?.start}
                 eventEndDate={selectedEvent?.end}
-                eventKeyword={selectedEvent?.keyword}
-                eventMeetingSummary={selectedEvent?.summary}
-                eventArticleLink={selectedEvent?.article_link}
-                eventArticleTitle={selectedEvent?.article_title}
-                eventMemo={selectedEvent?.memo}
                 meeting={selectedEvent?.meeting}
+                eventMemo={selectedEvent?.memo}
+                eventMeetingSummary={selectedEvent?.summary}
+                eventKeywords={selectedEvent?.keywords}
                 files={selectedEvent?.files}
                 onDelete={() => handleDeleteEvent(selectedEvent?.id)}
             />

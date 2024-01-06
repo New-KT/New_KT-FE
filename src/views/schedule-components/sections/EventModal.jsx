@@ -38,37 +38,33 @@ const EventModal = ({
     eventTitle,
     eventStartDate,
     eventEndDate,
-    eventKeyword,
+    eventKeywords,
     eventMeetingSummary,
-    eventArticleTitle,
-    eventArticleLink,
     eventMemo,
     meeting,
     files,
 
     onDelete,
 }) => {
-    const renderArticleLinks = () => {
-        if (
-            eventArticleLink &&
-            eventArticleTitle &&
-            eventArticleLink.length === eventArticleTitle.length
-        ) {
+    
+    const [selectedKeyword, setSelectedKeyword] = React.useState(null);
+    const [hoveredKeyword, setHoveredKeyword] = React.useState(null);
+
+    const renderArticleLinks = (keyword) => {
+        if (keyword && keyword.article_links && keyword.article_links.length > 0) {
             return (
                 <div>
-                    {eventArticleTitle.map((title, index) => (
-                        <div key={index}>
-                            <p style={{ margin: "0" }}>
-                                <a
-                                    className="event-title-link"
-                                    href={eventArticleLink[index]}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {title}
-                                </a>
-                            </p>
-                        </div>
+                    {keyword.article_links.map((link, articleIndex) => (
+                        <p key={articleIndex}>
+                            <a
+                                className="event-title-link"
+                                href={link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {keyword.article_titles[articleIndex]}
+                            </a>
+                        </p>
                     ))}
                 </div>
             );
@@ -108,45 +104,64 @@ const EventModal = ({
     return (
         <Modal isOpen={isOpen} toggle={onClose} className="modal-xl">
             <ModalHeader toggle={onClose}>
-                <div className="fs-1">{eventTitle}</div>
+                <div className="fs-1 fw-bold">{eventTitle}</div>
                 <div className="fs-6">
                     {meeting
-                        ? `${eventStartDate} - ${eventEndDate}`
-                        : `${formatDate(eventStartDate)} ${formatTimeRange(
-                              eventStartDate,
-                              eventEndDate
-                          )}`}
+                        ? `${formatDate(eventStartDate)} ${formatTimeRange(
+                            eventStartDate,
+                            eventEndDate
+                        )}`
+                        : `${formatDate(eventStartDate)} - ${formatDate(eventEndDate)}`}
                 </div>
             </ModalHeader>
-            <ModalBody className="d-flex flex-column gap-3">
-                {!meeting && (
+            <ModalBody className="d-flex flex-column gap-3" style={{ color: 'black' }}>
+            {meeting ? (
                     <>
                         <Row>
                             <Col>
-                                <h3>키워드</h3>
-                                <div>
-                                    <p>{eventKeyword}</p>
+                                <h3 style={{ fontWeight: 'bold' }}>키워드</h3>
+                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                                    {eventKeywords &&
+                                        eventKeywords.map((keyword, index) => (
+                                            <div
+                                                key={index}
+                                                onClick={() => setSelectedKeyword(keyword)}
+                                                onMouseEnter={() => setHoveredKeyword(keyword)}
+                                                onMouseLeave={() => setHoveredKeyword(null)}
+                                                className={`keyword-item ${selectedKeyword === keyword ? 'selected' : ''} ${hoveredKeyword === keyword ? 'hovered' : ''}`}
+                                                style={{ 
+                                                    color: selectedKeyword === keyword ? 'blue' : 'black',
+                                                    marginRight: '10px',
+                                                    marginBottom: '10px',
+                                                    fontSize: '20px', }}
+                                            >
+                                                <p>{keyword.keyword}</p>
+                                            </div>
+                                        ))}
                                 </div>
                             </Col>
                             <Col>
-                                <h3>기사</h3>
-                                <div>{renderArticleLinks()}</div>
+                                <h3 style={{ fontWeight: 'bold'}}>기사</h3>
+                                <div>{selectedKeyword && renderArticleLinks(selectedKeyword)}</div>
                             </Col>
                         </Row>
                         <Row>
-                            <h3>회의 요약</h3>
+                            <h3 style={{ fontWeight: 'bold'}}>회의 요약</h3>
                             <p>{eventMeetingSummary}</p>
                         </Row>
                     </>
+                ) : (
+                    <>
+                        <Row>
+                            <h3 style={{ fontWeight: 'bold'}}>메모</h3>
+                            <p>{eventMemo}</p>
+                        </Row>
+                        <Row>
+                            <h3 style={{ fontWeight: 'bold'}}>파일</h3>
+                            {renderFiles()}
+                        </Row>
+                    </>
                 )}
-                <Row>
-                    <h3>메모</h3>
-                    <p>{eventMemo}</p>
-                </Row>
-                <Row>
-                    <h3>파일</h3>
-                    {renderFiles()}
-                </Row>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={() => onDelete()}>

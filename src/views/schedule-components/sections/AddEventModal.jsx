@@ -28,6 +28,15 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
     };
 
     const handleSaveEvent = () => {
+        // console.log("Event Title:", eventTitle);
+        // console.log("Start Event Date:", startEventDate);
+        // console.log("Start Time:", startTime);
+        // console.log("End Event Date:", endEventDate);
+        // console.log("End Time:", endTime);
+        // console.log("Meeting:", meeting);
+        // console.log("Event Memo:", eventMemo);
+        // console.log("Selected Files:", selectedFiles);
+
         // 파일 업로드
         const formData = new FormData();
     
@@ -60,8 +69,8 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
             return res.json();
         })
         .then(newEvent => {
-            onSave(newEvent);
             console.log("newEvent:", newEvent);
+            onSave(newEvent);
     
             // Reset the form and close the modal
             setEventTitle("");
