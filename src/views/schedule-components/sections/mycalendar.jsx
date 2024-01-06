@@ -93,7 +93,7 @@ const MyCalendar = () => {
             },
         })
             .then((res) => {
-                if (res.status !== 201) {
+                if (res.status !== 200) {
                     throw Error(res);
                 }
                 return res.json();
