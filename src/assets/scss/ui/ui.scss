@@ -3,6 +3,7 @@
 a {
     text-decoration: none;
 }
+
 /*******************
 topbar color
 *******************/
@@ -23,62 +24,74 @@ topbar color
 /*******************
 Static slide 10
 *******************/
-.static-slider-head{
-    min-height: 600px; 
+.static-slider-head {
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: auto;
-    background-size:cover;
+    background-size: cover;
     background-position: center center;
-    .title{
-        color:$white;
+
+    .title {
+        color: $white;
         font-weight: 700;
         font-size: 70px;
         line-height: 100px;
     }
-    .subtitle{
-        color:$white;
+
+    .subtitle {
+        color: $white;
         line-height: 30px;
     }
 }
+
 /*******************
 Header 1
 *******************/
 
 .h1-nav {
     padding: 15px 0;
+
     .navbar-nav .nav-item {
         margin: 0 20px;
+
         .nav-link {
             padding: 12px 0px;
             color: $muted;
             font-weight: 400;
+
             &:hover {
                 color: $success;
             }
         }
+
         &:last-child {
             margin-right: 0px;
         }
     }
 }
+
 /*******************
 Header 2
 *******************/
 
 .h2-nav {
     padding: 15px 0;
+
     .navbar-nav .nav-item {
         margin: 0 20px;
+
         .nav-link {
             padding: 12px 0px;
             color: $white;
             font-weight: 400;
+
             &:hover {
                 color: $info;
             }
         }
+
         &:last-child {
             margin-right: 0px;
         }
@@ -91,23 +104,26 @@ Static slide 10
 .static-slider10 {
     padding: 10% 0;
     background-image: $banner-slider;
-    background-size:cover;
+    background-size: cover;
     background-position: center center;
-    .title{
-        color:$white;
+
+    .title {
+        color: $white;
         text-transform: uppercase;
         font-weight: 700;
         font-size: 48px;
         line-height: 50px;
     }
-    .subtitle{
-        color:$white;
+
+    .subtitle {
+        color: $white;
     }
 }
+
 @media(max-width:900px) {
     .static-slider10 {
         .title {
-            font-size:40px;
+            font-size: 40px;
             line-height: 45px;
         }
     }
@@ -117,23 +133,26 @@ Static slide 10
 Static slide 3
 *******************/
 
-.static-slider3{
+.static-slider3 {
     padding: 10% 0;
-    h1{
+
+    h1 {
         font-weight: 300;
         line-height: 50px;
-        span{
-            border-bottom:3px solid $success;
+
+        span {
+            border-bottom: 3px solid $success;
         }
     }
-    
+
 }
+
 @media(max-width:767px) {
-.static-slider3{    
-        h1{
+    .static-slider3 {
+        h1 {
             line-height: 30px;
-            font-size:24px;
-        } 
+            font-size: 24px;
+        }
     }
 }
 
@@ -144,11 +163,13 @@ form-banner 1
 #banner1 {
     background: right -3em center no-repeat #e9f3f8;
     background-image: $form-banner;
+
     h2 {
         font-size: 48px;
         line-height: 1;
         letter-spacing: -1px;
     }
+
     input {
         line-height: 72px;
         padding: 0;
@@ -157,6 +178,7 @@ form-banner 1
         display: inline-block;
         vertical-align: top;
     }
+
     input[type="text"] {
         color: $bodytext;
         border-radius: 36px 0 0 36px;
@@ -167,6 +189,7 @@ form-banner 1
         box-shadow: -5px 0 30px 0 rgba(0, 0, 0, 0.05);
         text-overflow: ellipsis;
     }
+
     input[type="submit"] {
         border-radius: 0 36px 36px 0;
         width: auto;
@@ -207,9 +230,11 @@ form-banner 1
         h2 {
             font-size: 40px;
         }
+
         input[type="text"] {
             width: 59%;
         }
+
         input[type="submit"] {
             padding: 0 20px;
         }
@@ -221,6 +246,7 @@ form-banner 1
         height: auto !important;
         padding: 100px 0;
     }
+
     #banner1 {
         background-position: right -6em center;
         background-size: 80%;
@@ -235,6 +261,7 @@ form-banner 1
     .banner {
         padding: 30px 0;
     }
+
     #banner1 {
         background-size: 100%;
         background-position: right center;
@@ -242,6 +269,7 @@ form-banner 1
         input[type="submit"] {
             padding: 0 30px;
         }
+
         img {
             margin-top: 25px;
         }
@@ -260,10 +288,12 @@ form-banner 1
             font-size: 14px;
             line-height: 50px;
         }
+
         input[type="text"] {
             border-radius: 25px 0 0 25px;
             text-indent: 20px;
         }
+
         input[type="submit"] {
             border-radius: 0 25px 25px 0;
             padding: 0 15px;
@@ -301,111 +331,156 @@ Feature 20
 *******************/
 .wrap-feature-20 {
     margin-top: 60px;
+
     [class*=col-lg-6] {
-        .card{
+        .card {
             overflow: hidden;
         }
     }
+
     .linking {
         width: 100%;
         display: block;
-        padding:35px 0;
+        padding: 35px 0;
     }
 }
 
 /*******************
 Feature 30
 *******************/
-.feature30{
+.feature30 {
     position: relative;
 }
-.wrap-feature30-box{
+
+.wrap-feature30-box {
     position: absolute;
-    top:20%;
+    top: 20%;
     right: 0px;
 }
 
 /*******************
 Portfolio 1
 *******************/
-.img-ho{
-    overflow:hidden;
-    img{
-        transition:0.1s ease-in;
-        &:hover{
-            transform:scale(1.1);
+.img-ho {
+    overflow: hidden;
+
+    img {
+        transition: 0.1s ease-in;
+
+        &:hover {
+            transform: scale(1.1);
         }
     }
-}  
+}
 
 /*******************
 Pricing 8
 *******************/
-.pricing8{
-    .pricing-box{
-        sup{
-            top:-20px;
+.pricing8 {
+    .pricing-box {
+        sup {
+            top: -20px;
             font-size: 16px;
         }
-        .btn{
+
+        .btn {
             border-top-left-radius: 0px;
             border-top-right-radius: 0px;
-        }   
+        }
     }
 }
 
 /*******************
 team 2
-*******************/ 
-.team2{
-    .pro-pic{
-        min-height:200px;
+*******************/
+
+.team2 {
+    .pro-pic {
+        min-height: 200px;
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
+
         &.t1 {
             background-image: $t1;
         }
+
         &.t2 {
             background-image: $t2;
         }
+
         &.t3 {
             background-image: $t3;
         }
+
         &.t4 {
             background-image: $t4;
         }
-        .card-img-overlay{
+
+        &.t5 {
+            background-image: $t5;
+        }
+
+        &.t6 {
+            background-image: $t6;
+        }
+
+        &.t7 {
+            background-image: $t7;
+        }
+
+        &.t8 {
+            background-image: $t8;
+        }
+
+        &.about {
+            background-size: cover;
+            /* 이미지를 가득 채우도록 설정 */
+            background-position: top;
+            /* 이미지를 가운데 정렬 */
+            background-repeat: no-repeat;
+            /* 배경 이미지 반복 제거 */
+            min-height: 540px;
+            /* 최소 높이 설정 */
+            background-image: $about;
+        }
+
+        .card-img-overlay {
             background: rgba(26, 139, 243, 0.87);
             display: none;
-            
-            ul{
+
+            ul {
                 position: relative;
-                top:50%;
+                top: 50%;
                 text-align: center;
-                li a{
-                    color:$white;
-                    padding:0 10px;
+
+                li a {
+                    color: $white;
+                    padding: 0 10px;
                     transition: 0.1s ease-in;
                     display: block;
-                    &:hover{
-                        
+
+                    &:hover {
+
                         transform: translate3d(0px, -5px, 0px);
                     }
                 }
             }
         }
-        &:hover{
-            .card-img-overlay{
+
+        &:hover {
+            .card-img-overlay {
                 display: block;
             }
         }
-    } 
-    .title{
-        margin: 30px 0 0 0;
     }
-    .subtitle{
-        margin: 0 0 20px 0; 
+
+    .title {
+        margin: 0px 0 0 0;
+    }
+
+    .subtitle {
+        margin: 0 0 20px 0;
         font-size: 13px;
     }
 }
@@ -413,49 +488,55 @@ team 2
 /*******************
 Testimonial 3
 *******************/
-  
-  .testimonial3 {
-      .testi3 {
-          .card-body {
-              padding: 40px;
-          }
-          h6 {
-              line-height: 26px;
-          }
-          .thumb-img {
-              img {
-                  width: 60px;
-              }
-          }
-          .customer {
-              text-transform: uppercase;
-              font-size: 14px;
-              font-weight: 500;
-          }
-      }
-  }
+
+.testimonial3 {
+    .testi3 {
+        .card-body {
+            padding: 40px;
+        }
+
+        h6 {
+            line-height: 26px;
+        }
+
+        .thumb-img {
+            img {
+                width: 60px;
+            }
+        }
+
+        .customer {
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}
 
 /*******************
 Blog homepage 2
 *******************/
-  
+
 .blog-home2 {
     [class*=col-] {
-          transition: 0.2s ease-in;
-          &:hover {
-              transform: translateY(-10px);
-          } 
-      }
-    .date-pos{
+        transition: 0.2s ease-in;
+
+        &:hover {
+            transform: translateY(-10px);
+        }
+    }
+
+    .date-pos {
         padding: 10px;
         display: inline-block;
         position: absolute;
-        right:10px;
-        top:10px;
-        color:$white;
+        right: 10px;
+        top: 10px;
+        color: $white;
         border-radius: $radius;
         text-align: center;
-        span{
+
+        span {
             display: block;
             font-size: 30px;
             line-height: 30px;
@@ -467,12 +548,13 @@ Blog homepage 2
 Responsive
 *******************/
 @media(max-width:1024px) {
-    .static-slider10{
-        .title{
-                font-size:60px;
-                line-height: 60px;
-            }
+    .static-slider10 {
+        .title {
+            font-size: 60px;
+            line-height: 60px;
+        }
     }
+
     .topbar {
         background: $dark;
     }
