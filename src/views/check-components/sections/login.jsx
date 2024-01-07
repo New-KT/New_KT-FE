@@ -49,6 +49,7 @@ const PageLogin = () => {
         })
         .catch((err) => {
             console.error(err);
+            alert("올바르지 않은 이메일 또는 비밀번호입니다.");
         })
     }
 
