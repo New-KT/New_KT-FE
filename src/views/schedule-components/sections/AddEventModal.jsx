@@ -42,7 +42,7 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
     
         if (selectedFiles) {
             for (let i = 0; i < selectedFiles.length; i++) {
-                formData.append("file", selectedFiles[i]);
+                formData.append(`file${i + 1}`, selectedFiles[i]);
             }
         }
     
@@ -54,7 +54,7 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
     
         const headers = {
             "Authorization": `Token ${window.localStorage.getItem('token')}`,
-            "Content-Type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data",
         };
     
         fetch("http://127.0.0.1:8000/schedule/create/", {

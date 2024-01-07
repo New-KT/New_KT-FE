@@ -148,29 +148,35 @@ const EventModal = ({
                         </Row>
                         <Row>
                             <h3 style={{ fontWeight: 'bold' }}>회의 요약</h3>
-                            <p className="fs-5 fw-bold">{eventMeetingSummary["회의 제목"]}</p>
+                            <p className="fs-5 fw-bold">{eventMeetingSummary["회의 제목"] || ''}</p>
                             <Col>
                                 <p className="fw-bold">주요 이슈 및 진행상황:</p>
-                                <ul>
-                                    {eventMeetingSummary["주요 이슈 및 진행상황"].map((issue, index) => (
-                                        <li key={index}>{issue}</li>
-                                    ))}
-                                </ul>
+                                {eventMeetingSummary["주요 이슈 및 진행상황"] && (
+                                    <ul>
+                                        {eventMeetingSummary["주요 이슈 및 진행상황"].map((issue, index) => (
+                                            <li key={index}>{issue}</li>
+                                        ))}
+                                    </ul>
+                                )}
                             </Col>
                             <Col>  
                                 <p className="fw-bold">새로운 상황 및 공지사항:</p>
-                                <ul>
-                                    {eventMeetingSummary["새로운 상황 및 공지사항"].map((notice, index) => (
-                                        <li key={index}>{notice}</li>
-                                    ))}
-                                </ul>
+                                {eventMeetingSummary["새로운 상황 및 공지사항"] && (
+                                    <ul>
+                                        {eventMeetingSummary["새로운 상황 및 공지사항"].map((issue, index) => (
+                                            <li key={index}>{issue}</li>
+                                        ))}
+                                    </ul>
+                                )}
                                 
                                 <p className="fw-bold">추가 안건:</p>
-                                <ul>
-                                    {eventMeetingSummary["추가 안건"].map((agenda, index) => (
-                                        <li key={index}>{agenda}</li>
-                                    ))}
-                                </ul>
+                                {eventMeetingSummary["추가 안건"] && (
+                                    <ul>
+                                        {eventMeetingSummary["추가 안건"].map((issue, index) => (
+                                            <li key={index}>{issue}</li>
+                                        ))}
+                                    </ul>
+                                )}
                             </Col>
                         </Row>
                     </>
