@@ -127,7 +127,7 @@ const SignupForm = () => {
         })
         .then(res => {
             alert("회원 가입이 완료되었습니다.");
-            window.location.href = "/singin";
+            window.location.href = "/signin";
         })
         .catch((err) => {
             console.error(err);
