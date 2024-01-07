@@ -54,7 +54,25 @@ const MyCalendar = () => {
     //                 ]
     //             }
     //         ],
-    //         summary: "회의 요약"
+    //         summary: {
+    //             "회의 제목": "AI 기술 스택 업그레이드에 대한 논의",
+    //             "주요 이슈 및 진행상황": [
+    //                 "자연어 처리 모듈의 임베딩 방법에 대한 논의",
+    //                 "Transformer 기반의 BERT 모델 검토",
+    //                 "BERT 모델의 커스터마이징 필요성 논의",
+    //                 "BERT 훈련 데이터셋 구축 과정에 대한 설명",
+    //                 "데이터셋 품질 보증 단계에 대한 논의",
+    //                 "모델의 인퍼런스 시간과 메모리 사용량 벤치마킹 결과 공유 예정",
+    //             ],
+    //             "새로운 상황 및 공지사항": [
+    //                 "인퍼런스 시간과 메모리 사용량 벤치마킹 결과는 다음 회의에서 제시 예정",
+    //             ],
+    //             "추가 안건": [
+    //                 "다음 회의에서 구체적인 수정 사항과 개선 계획에 대해 논의 예정",
+    //                 "회의록 작성해주세요",
+    //             ],
+    //         }
+        
     //     },
     //     {
     //         id: 24,
@@ -114,79 +132,88 @@ const MyCalendar = () => {
         setAddEventModalOpen(true);
     };
 
-    // // 클릭한 이벤트의 정보를 모달에 표시
-    // const handleEventClick = (clickInfo) => {
-    //     // 클릭한 이벤트의 정보를 가져와서 모달을 엽니다.
-    //     const { event } = clickInfo;
-    //     const eventId = parseInt(event._def.publicId);
-
-    //     // 선택한 event를 찾아서 setSelectedEvent에 저장
-    //     setSelectedEvent(events.find((event) => event.id === eventId));
-    //     setEventModalOpen(true);
-    // };
-
+    // 클릭한 이벤트의 정보를 모달에 표시
     const handleEventClick = (clickInfo) => {
+        // 클릭한 이벤트의 정보를 가져와서 모달을 엽니다.
         const { event } = clickInfo;
         const eventId = parseInt(event._def.publicId);
 
-        fetch(`eventclick/${eventId}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${window.localStorage.getItem("token")}`,
-            },
-        })
-        .then((res) => {
-            if (res.status !== 200) {
-                throw Error(res);
-            }
-            return res.json();
-        })
-        .then((eventDetails) => {
-            // 클릭한 이벤트 객체에 서버에서 가져온 추가 정보를 추가
-            setSelectedEvent({
-                ...event,
-                keywords: eventDetails.keywords,
-                summary: eventDetails.summary,
-                memo: eventDetails.memo,
-                files: eventDetails.files,
-            });
-
-            // // 파일이 존재하는 경우 블롭 객체를 가져와서 files 배열에 추가
-            // if (eventDetails.files && eventDetails.files.length > 0) {
-            //     const filePromises = eventDetails.files.map((file) => {
-            //         return fetch(`/${file.file_link}`)
-            //             .then((res) => res.blob())
-            //             .then((blob) => {
-            //                 // 여기에서 블롭 객체를 사용하거나 저장할 수 있습니다.
-            //                 console.log("Blob:", blob);
-            //                 return {
-            //                     ...file,
-            //                     blob: blob, // 블롭 객체를 files 배열에 추가
-            //                 };
-            //             });
-            //     });
-
-            //     // 모든 파일의 블롭 객체가 준비될 때까지 기다린 후 모달 상태를 업데이트
-            //     Promise.all(filePromises)
-            //         .then((updatedFiles) => {
-            //             // 모든 파일의 블롭 객체가 준비되면 모달 상태를 업데이트
-            //             setSelectedEvent((prevEvent) => ({
-            //                 ...prevEvent,
-            //                 files: updatedFiles,
-            //             }));
-            //             console.log("All files processed.");
-            //         })
-            //         .catch((error) => {
-            //             console.error("Error processing files:", error);
-            //         });
-            // }
-            setEventModalOpen(true);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        // 선택한 event를 찾아서 setSelectedEvent에 저장
+        setSelectedEvent(events.find((event) => event.id === eventId));
+        setEventModalOpen(true);
     };
+
+    // const handleEventClick = (clickInfo) => {
+    //     const { event } = clickInfo;
+    //     const eventId = parseInt(event._def.publicId);
+
+    //     fetch(`http://127.0.0.1:8000/schedule/eventclick/${eventId}`, {
+    //         method: "GET",
+    //         headers: {
+    //             // "Content-Type": "application/json",
+    //             "Content-Type": "multipart/form-data",
+    //             "Authorization": `Token ${window.localStorage.getItem("token")}`,
+    //         },
+    //     })
+    //     .then((res) => {
+    //         if (!res.ok) {
+    //             throw Error(res);
+    //         }
+    //         return res.json();
+    //     })
+    //     .then((eventDetails) => {
+    //         console.log("Received file:", eventDetails.files);
+
+    //         // 클릭한 이벤트 객체에 서버에서 가져온 추가 정보를 추가
+    //         setSelectedEvent({
+    //             ...eventDetails,
+
+    //             keywords: eventDetails.keywords,
+    //             summary: eventDetails.summary,
+    //             memo: eventDetails.memo,
+
+    //             files: eventDetails.files.map((file) => ({
+    //                 file_link: file.file_url,
+    //                 file_name: file.file_name,
+    //                 blob: null,  // 블롭 객체는 초기에는 null로 설정
+    //             })),
+    //         });
+
+    //         // 파일이 존재하는 경우 블롭 객체를 가져와서 files 배열에 추가
+    //         if (eventDetails.files && eventDetails.files.length > 0) {
+    //             const filePromises = eventDetails.files.map((file) => {
+    //                 return fetch(`${file.file_url}`)
+    //                     .then((res) => res.blob())
+    //                     .then((blob) => {
+    //                         console.log("Blob:", blob);
+    //                         return {
+    //                             file_link: file.file_url,
+    //                             file_name: file.file_name,
+    //                             blob: blob,
+    //                         };
+    //                     });
+    //             });
+
+    //             // 모든 파일의 블롭 객체가 준비될 때까지 기다린 후 모달 상태를 업데이트
+    //             Promise.all(filePromises)
+    //             .then((updatedFiles) => {
+    //                 // 모든 파일의 블롭 객체가 준비되면 모달 상태를 업데이트
+    //                 setSelectedEvent((prevEvent) => ({
+    //                     ...prevEvent,
+    //                     files: updatedFiles,
+    //                 }));
+    //                 console.log("All files processed.");
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error processing files:", error);
+    //             });
+    //         }
+    //         setEventModalOpen(true);
+    //     })
+    //     .catch((err) => {
+    //         console.error(err);
+    //     });
+    // };
 
 
     const handleDeleteEvent = (eventId) => {
