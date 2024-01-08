@@ -10,6 +10,8 @@ import {
     CardHeader,
 } from "reactstrap";
 
+import './css/banner2.css'
+
 const formatTimeRange = (startString, endString) => {
     const startDate = new Date(startString);
     const endDate = new Date(endString);
@@ -26,6 +28,15 @@ const formatTimeRange = (startString, endString) => {
 
 const HeaderBanner2 = () => {
     const [schedule, setSchedule] = useState([]);
+    // const [schedule, setSchedule] = useState([
+    //     {
+    //         id: 1,
+    //         title: "test",
+    //         start: "2021-09-29T10:00:00Z",
+    //         end: "2021-09-29T11:00:00Z",
+    //         memo: "test",
+    //     },
+    // ]);
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/schedule/loginhome/", {
@@ -55,13 +66,17 @@ const HeaderBanner2 = () => {
             <Container>
                 <Row className="justify-content-center">
                     <Col
-                        lg="8"
-                        md="6"
+                        // lg="8"
+                        // md="6"
                         className="align-self-center text-center"
                     >
                         {schedule.length > 0 ? (
                             schedule.map((event) => (
-                                <Card key={event.id} className="m-t-20">
+                                <Card
+                                    className="my-5"
+                                    color="dark"
+                                    inverse key={event.id}
+                                >
                                     <CardHeader>
                                         <div className="fs-4">
                                             {event.title}

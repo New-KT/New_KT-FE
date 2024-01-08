@@ -1,8 +1,12 @@
-// meetin-summary.jsx
+// meeting-summary.jsx
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 
+import Loading from "./loading.jsx";
+
 const MeetingSummary = () => {
+    const [loading, setLoading] = useState(true);
+
     const [summary, setSummary] = useState({
         "회의 제목": "",
         "주요 이슈 및 진행상황": [],
@@ -45,12 +49,17 @@ const MeetingSummary = () => {
             })
             .then((data) => {
                 setSummary(data);
+                setLoading(false);
                 console.log("data:", data);
             })
             .catch((err) => {
                 console.error(err);
             });
     }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <Container style={{ marginTop: '40px', marginBottom: '20px', color: 'black'}}>
