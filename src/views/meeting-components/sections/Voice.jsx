@@ -107,12 +107,18 @@ const Voice = () => {
     }, [socket, audioStream]);
 
     useEffect(() => {
+        console.log("NewKeywordData가 변경되었습니다:", NewKeywordData);
+    }, [NewKeywordData]);
+
+    useEffect(() => {
         if (socket) {
             socket.onmessage = (event) => {
+                console.log('Socket event received!');
                 const data = JSON.parse(event.data);
-                if (data.type === "meeting" && data.meeting_data) {
+                console.log('Received data:', data);
+                if (data.meeting === "total" && data.meeting_data) {
                     // 'total' 타입의 메시지를 받았을 때의 처리
-                    console.log('Received total data:', data.meeting_data);
+                    console.log('Received meeting_data data:', data.meeting_data);
                     
                     const newKeywordObject = {};
 
