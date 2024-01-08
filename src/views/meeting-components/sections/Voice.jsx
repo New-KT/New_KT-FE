@@ -8,7 +8,7 @@ import KeywordComponent from "./keyword.jsx";
 const Voice = () => {
     const [socket, setSocket] = useState(null);
     const [audioStream, setAudioStream] = useState(null);
-    const newKeys = new Set();
+    const [newKeys, setNewKeys] = useState(new Set());
 
     const [isStarted, setIsStarted] = useState(false);
 
@@ -46,6 +46,7 @@ const Voice = () => {
             // 현재 연결이 열려 있을 경우 Finish 버튼만 보이도록 설정
             setIsStarted(false);
             setNewKeywordData({}); // 기존 데이터를 빈 객체로 초기화
+            setNewKeys(new Set()); // newKeys 초기화
 
         }  else {
             try {
@@ -87,6 +88,7 @@ const Voice = () => {
             // 녹음이 종료되면서 상태 초기화
             setIsStarted(false);
             setNewKeywordData({});
+            setNewKeys(new Set()); // newKeys 초기화
             window.location.replace("/summary");
         }
     };
@@ -120,7 +122,7 @@ const Voice = () => {
                     
                         // 기존 데이터에 키가 존재하지 않으면 업데이트
                         if (!newKeys.has(key)) {
-                            newKeys.add(key);
+                            setNewKeys((prevKeys) => new Set([...prevKeys, key]));
                             newKeywordObject[key] = innerArray;
                         }
                     });
