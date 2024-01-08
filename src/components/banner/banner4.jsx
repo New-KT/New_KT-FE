@@ -22,11 +22,11 @@ const HeaderBanner4 = () => {
         <div className="header1 po-relative bg-dark">
             <Container>
                 <Navbar className="navbar-expand-lg h2-nav">
-                    <NavbarBrand tag={Link} to="/">
+                    <NavbarBrand tag={Link} to="/home">
                         <img
                             src={logo}
                             alt="wrapkit"
-                            style={{ maxWidth: "200px", height: "auto" }}
+                            style={{ maxWidth: "150px", height: "auto" }}
                         />
                     </NavbarBrand>
                     <NavbarToggler onClick={toggle}>

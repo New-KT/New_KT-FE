@@ -33,7 +33,7 @@ const Header = () => {
                             <img
                                 src={logo}
                                 alt="wrapkit"
-                                style={{ maxWidth: "200px", height: "auto" }}
+                                style={{ maxWidth: "150px", height: "auto" }}
                             />
                         </NavbarBrand>
                         <NavbarToggler onClick={toggle}>
