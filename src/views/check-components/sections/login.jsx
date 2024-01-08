@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import './css/login.css'
+
 const PageLogin = () => {
     // const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -60,7 +62,7 @@ const PageLogin = () => {
                     <Row className="justify-content-center">
                         <Col md="7" className="text-center">
                             <h1 className="title font-bold">Sign in</h1>
-                            <h6 className="subtitle">
+                            <h6 className="subtitle" >
                                 빠르고 간편한 로그인으로 새로운 경험을 시작하세요.
                             </h6>
                         </Col>
