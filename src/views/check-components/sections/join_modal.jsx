@@ -1,6 +1,6 @@
 // join_modal.jsx
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Modal,
     ModalHeader,
@@ -13,27 +13,48 @@ import {
 } from "reactstrap";
 
 const TermsModal = ({ isOpen, toggleModal, onConfirm }) => {
-    const [newKTAgrreement, setNewKTAgrreement] = useState(false);
-    const [personalInfoAgreement, setPersonalInfoAgreement] = useState(false);
+    const [allAgreed, setAllAgreed] = useState(false);
+    const [agreements, setAgreements] = useState({
+        termsAgreed: false,
+        personalInfoAgreed: false,
+        provisionAgreed: false,
+        voiceInfoAgreed: false,
+        serviceAgreed: false,
+    });
 
-    const handleNewKTAgreementChange = () => {
-        const updatedValue = !newKTAgrreement;
-        setNewKTAgrreement(updatedValue);
-        // Update the state of the other checkbox
-        setPersonalInfoAgreement(updatedValue);
+    useEffect(() => {
+        const agreementsWithoutService = { ...agreements, serviceAgreed: true };
+        const allChecked = Object.values(agreementsWithoutService).every((value) => value);
+        setAllAgreed(allChecked);
+    }, [agreements]);
+
+    const handleAgreementChange = (event) => {
+        const { name, checked } = event.target;
+    
+        setAgreements((prevAgreements) => ({ ...prevAgreements, [name]: checked }));
+    
+        const agreementsWithoutService = { ...agreements, serviceAgreed: true };
+        const allChecked = Object.values(agreementsWithoutService).every((value) => value);
+        setAllAgreed(allChecked);
+    };  
+
+    const handleAllAgreementChange = (event) => {
+        const { checked } = event.target;
+        setAgreements((prevAgreements) => 
+            Object.keys(prevAgreements).reduce(
+                (newAgreements, agreementKey) => ({
+                    ...newAgreements,
+                    [agreementKey]: checked,
+                }), 
+                {}
+            )
+        );
+        setAllAgreed(checked);
     };
 
     const handleConfirm = () => {
-        // Check if all required checkboxes are checked
-        if (personalInfoAgreement) {
-            // Call the onConfirm function only if all required checkboxes are checked
-            onConfirm();
-            // Close the modal
-            toggleModal();
-        } else {
-            // Optionally, you can show a message or take other actions if required checkboxes are not checked
-            alert("모든 필수 항목에 동의해야 합니다.");
-        }
+        onConfirm();
+        toggleModal();
     };
 
     return (
@@ -44,8 +65,10 @@ const TermsModal = ({ isOpen, toggleModal, onConfirm }) => {
                     <Label check>
                         <Input
                             type="checkbox"
-                            checked={newKTAgrreement}
-                            onChange={handleNewKTAgreementChange}
+                            id="agree_check_all"
+                            name="agree_check_all"
+                            checked={allAgreed}
+                            onChange={handleAllAgreementChange}
                         />
                         New KT 서비스 약관에 모두 동의합니다.
                     </Label>
@@ -64,12 +87,64 @@ const TermsModal = ({ isOpen, toggleModal, onConfirm }) => {
                     <Label check>
                         <Input
                             type="checkbox"
-                            checked={personalInfoAgreement}
-                            onChange={() =>
-                                setPersonalInfoAgreement(!personalInfoAgreement)
-                            }
+                            id="agree_check_used"
+                            name="termsAgreed"
+                            checked={agreements.termsAgreed}
+                            onChange={handleAgreementChange}
                         />
-                        [필수] 개인정보 수집 및 이용 동의
+                        [필수] 이용약관 동의
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check>
+                    <Label check>
+                        <Input
+                            type="checkbox"
+                            id="agree_check_info"
+                            name="personalInfoAgreed"
+                            checked={agreements.personalInfoAgreed}
+                            onChange={handleAgreementChange}
+                        />
+                        [필수] 개인정보 이용 수집 방침
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check>
+                    <Label check>
+                        <Input
+                            type="checkbox"
+                            id="agree_check_info_other"
+                            name="provisionAgreed"
+                            checked={agreements.provisionAgreed}
+                            onChange={handleAgreementChange}
+                        />
+                        [필수] 개인정보 제 3자 제공 동의
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check>
+                    <Label check>
+                        <Input
+                            type="checkbox"
+                            id="agree_check_voice"
+                            name="voiceInfoAgreed"
+                            checked={agreements.voiceInfoAgreed}
+                            onChange={handleAgreementChange}
+                        />
+                        [필수] 음성 정보 수집 및 이용 동의
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check>
+                    <Label check>
+                        <Input
+                            type="checkbox"
+                            id="agree_check_push"
+                            name="serviceAgreed"
+                            checked={agreements.serviceAgreed}
+                            onChange={handleAgreementChange}
+                        />
+                        [선택] 서비스 알림 수신 동의
                     </Label>
                 </FormGroup>
                 {/* Add more checkboxes as needed */}
@@ -78,8 +153,8 @@ const TermsModal = ({ isOpen, toggleModal, onConfirm }) => {
                 <Button
                     color="primary"
                     onClick={handleConfirm}
-                    disabled={!newKTAgrreement && !personalInfoAgreement}
-                    >
+                    disabled={!allAgreed}
+                >
                     확인
                 </Button>
                 <Button color="secondary" onClick={toggleModal}>
