@@ -60,6 +60,9 @@ const Voice = () => {
                     console.log('WebSocket connection opened');
                     
                     newSocket.send(JSON.stringify({ type: "start_meeting" }));
+
+                    // 녹음이 시작되었음을 나타내는 상태를 설정
+                    setIsStarted(true);
                 };
             } catch (error) {
                 console.error('Error accessing microphone:', error);
@@ -81,7 +84,9 @@ const Voice = () => {
                 setAudioStream(null);
             }
 
+            // 녹음이 종료되면서 상태 초기화
             setIsStarted(false);
+            setNewKeywordData({});
             window.location.replace("/summary");
         }
     };
