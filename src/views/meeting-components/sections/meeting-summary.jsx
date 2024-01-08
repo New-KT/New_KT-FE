@@ -1,4 +1,4 @@
-// meetin-summary.jsx
+// meeting-summary.jsx
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 
