@@ -61,9 +61,7 @@ const PageLogin = () => {
                         <Col md="7" className="text-center">
                             <h1 className="title font-bold">Sign in</h1>
                             <h6 className="subtitle">
-                                Here you can check Demos we created based on
-                                WrapKit. It's quite easy to create your own
-                                dream website &amp; dashboard in no time.
+                                빠르고 간편한 로그인으로 새로운 경험을 시작하세요.
                             </h6>
                         </Col>
                     </Row>

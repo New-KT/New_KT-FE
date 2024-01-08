@@ -1,5 +1,6 @@
 //join.jsx
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
     Container,
     Row,
@@ -41,6 +42,7 @@ const SignupForm = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
+    const [EmailErrorMsg, setEmailErrorMsg] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // 약관 동의 상태를 저장하는 state 추가
@@ -114,27 +116,34 @@ const SignupForm = () => {
             },
 
             body: JSON.stringify({
-                // "username": userName,
                 "email": email,
                 "password": password,
                 "password2": confirmPassword,
             }),
         })
         .then(res => {
-            if (res.status !== 201) {
+            if (res.status === 400) {
+                return res.json();
+            } else if (res.status !== 201) {
                 throw Error(res);
-            } return res.json();
+            }
+            return res.json();
         })
         .then(res => {
-            alert("회원 가입이 완료되었습니다.");
-            window.location.href = "/signin";
+            if (res.email && res.email[0] === "This email is already registered.") {
+                setEmailErrorMsg("이미 등록된 이메일입니다.");
+            } else if (res.email && res.email[0] === "Enter a valid email address.") {
+                setEmailErrorMsg("올바르지 않은 이메일 형식입니다.");
+            } else if (res.non_field_errors && res.non_field_errors[0].includes("aivle e-mail")) {
+                setEmailErrorMsg("'aivle.kt.co.kr' 형식이 아닙니다.");
+            } else {
+                alert("회원 가입이 완료되었습니다.");
+                window.location.href = "/signin";
+            }
         })
         .catch((err) => {
             console.error(err);
         })
-
-        // console.log("success"); // 비밀번호가 규칙에 맞으면 success를 콘솔에 출력
-        // 비밀번호가 규칙에 맞으면 회원가입 로직을 실행
     };
 
     return (
@@ -146,9 +155,7 @@ const SignupForm = () => {
                         <Col md="7" className="text-center">
                             <h1 className="title font-bold">Create account</h1>
                             <h6 className="subtitle">
-                                Here you can check Demos we created based on
-                                WrapKit. Its quite easy to Create your own dream
-                                website &amp; dashboard in No-time.
+                                회의 중 키워드 추출과 뉴스 실시간 요약, 회의 종료 후 간략한 내용 정리를 통해 당신의 호기심을 충족하세요. 지금 바로 다양한 회의 경험을 시작해보세요!
                             </h6>
                         </Col>
                     </Row>
@@ -180,6 +187,11 @@ const SignupForm = () => {
                                     value={email}
                                     onChange={handleEmailChange}
                                 />
+                                {EmailErrorMsg && (
+                                    <div style={{ color: "red" }}>
+                                        {EmailErrorMsg}
+                                    </div>
+                                )}
                             </FormGroup>
 
                             <FormGroup>
@@ -251,12 +263,14 @@ const SignupForm = () => {
                                 >
                                     Submit
                                 </Button>
-                                <Button
-                                    type="submit"
-                                    className="btn btn-inverse waves-effect waves-light"
-                                >
-                                    Cancel
-                                </Button>
+                                <Link to="/">
+                                    <Button
+                                        type="cancel"
+                                        className="btn btn-inverse waves-effect waves-light"
+                                    >
+                                        Cancel
+                                    </Button>
+                                </Link>
                             </div>
                         </Form>
                     </Col>
