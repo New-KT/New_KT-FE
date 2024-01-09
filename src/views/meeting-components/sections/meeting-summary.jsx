@@ -59,15 +59,15 @@ const MeetingSummary = () => {
         });
     }, []);
 
-    // if (loading) {
-    //     return <Loading />;
-    // }
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div id="page">
             <Container style={{ marginTop: '40px', marginBottom: '20px', color: 'black'}}>
                 <Row>
-                    <h1 style={{ fontWeight: 'bold', marginBottom: '60px' }}>{summary["회의 제목"]}</h1>
+                    <h1 className="meeting-title" style={{ fontWeight: 'bold', marginBottom: '60px' }}>{summary["회의 제목"]}</h1>
                     
                     <p className="fs-3 fw-semibold" style={{ marginTop: '5px' }}>주요 이슈 및 진행상황:</p>
                     <blockquote class="block1">

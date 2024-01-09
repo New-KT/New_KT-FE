@@ -56,7 +56,7 @@ const PageLogin = () => {
     }
 
     return (
-        <div>
+        <div id='login-container'>
             <div className="spacer" id="forms-component">
                 <Container>
                     <Row className="justify-content-center">

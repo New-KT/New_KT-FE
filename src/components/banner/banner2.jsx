@@ -31,9 +31,9 @@ const HeaderBanner2 = () => {
     // const [schedule, setSchedule] = useState([
     //     {
     //         id: 1,
-    //         title: "test",
-    //         start: "2021-09-29T10:00:00Z",
-    //         end: "2021-09-29T11:00:00Z",
+    //         title: "반별미팅",
+    //         start: "2024-01-16T14:00:00",
+    //         end: "2024-01-16T15:00:00",
     //         memo: "test",
     //     },
     // ]);
@@ -73,6 +73,7 @@ const HeaderBanner2 = () => {
                         {schedule.length > 0 ? (
                             schedule.map((event) => (
                                 <Card
+                                    id="schedule-card"
                                     className="my-5"
                                     color="dark"
                                     inverse key={event.id}

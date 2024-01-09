@@ -34,7 +34,7 @@ box-sizing: border-box;
     background: #dcdcdc;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-h1{
+.meeting-title {
     font-family: 'GowunBatang-Regular', cursive;
     margin-bottom: 6rem;
     text-align: center;

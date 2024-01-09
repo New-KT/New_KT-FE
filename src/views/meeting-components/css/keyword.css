@@ -1,19 +1,4 @@
-@font-face {
-    font-family: 'SunBatang-Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GowunBatang-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
-    font-weight: normal, bold;
-    font-style: normal;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
+/* keyword.css */
 
 #keywordPage {
     font-family: 'GowunBatang-Regular';
@@ -23,12 +8,12 @@
 
 .note {
     position: relative;
-    width: 60%;
     padding: 1.2em 1.5em;
     margin: 2em auto;
     color: #fff;
-    background: #2ecc71;
-    overflow: hidden
+    background: #6bc59c;
+    overflow: hidden;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .note.orange {
@@ -47,9 +32,43 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
     display: block;
     width: 0
-  }
+}
 
 .note.orange:before {
     border-color: #fff #fff #e67e22 #e67e22;
     background: #e67e22;
-  }
+}
+
+.divider
+{
+	position: relative;
+	margin-top: 40px;
+    margin-bottom: 40px;
+	height: 1px;
+}
+
+.div-transparent:before
+{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 5%;
+	right: 5%;
+	width: 90%;
+	height: 1px;
+	background-image: linear-gradient(to right, transparent, rgb(48,49,51), transparent);
+}
+
+.div-stopper:after
+{
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: -6px;
+	left: calc(50% - 7px);
+	width: 14px;
+	height: 12px;
+	background-color: #6bc59c;
+	border-left: 1px solid rgb(48,49,51);
+	border-right: 1px solid rgb(48,49,51);
+}

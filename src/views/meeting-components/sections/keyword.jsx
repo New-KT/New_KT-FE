@@ -42,8 +42,7 @@ const KeywordComponent = ({ keywordData }) => {
     //           'link': ['https://n.news.naver.com/mnews/article/016/0002245616?sid=101', 'https://n.news.naver.com/mnews/article/119/0002783640?sid=101', 'https://n.news.naver.com/mnews/article/241/0003319901?sid=105'],
     //           'news_summary': '요약:\n식약처는 인공지능(AI) 기술을 활용한 제약 시장이 빠르게 성장하고 있으며, 2023년까지 약 1.3조원 규모로 전망되고 있다고 밝혔다. ... AI를 통해 희귀병이나 감염병 등 다양한 질환용 신약을 신속하게 개발할 수 있고, 맞춤형 신약 개발에도 용이해진다는 것이다.'
     //         }
-    //       ],
-          
+    //       ],  
     //   });
     const [selectedKeyword, setSelectedKeyword] = useState(null);
 
@@ -73,7 +72,7 @@ const KeywordComponent = ({ keywordData }) => {
                                         marginRight: '20px', // 각 키워드 사이의 간격을 조절
                                         marginBottom: '10px', // 행 간의 간격을 조절
                                         fontSize: '25px', // 글씨 크기를 조절
-                                        color: selectedKeyword === keyword ? '#00a086' : 'black',
+                                        color: selectedKeyword === keyword ? '#00A086' : 'black',
                                     }}
                                 >
                                 <FontAwesomeIcon icon={faHashtag} /> {keyword}
@@ -81,11 +80,11 @@ const KeywordComponent = ({ keywordData }) => {
                             ))}
                         </div>
                     </Col>
-                    <div class='note'>
+
                     <Col style={{ fontSize: '24px', color: 'black' }}>
                         {/* 오른쪽에 선택한 키워드의 세부 정보를 표시 */}
                         {selectedKeyword && (
-                            <>
+                            <div className='note'>
                                 <Row style={{marginBottom: '30px'}}>
                                     <Col>
                                         <div style={{ fontSize: '30px', fontWeight: 'bold' }}>
@@ -97,32 +96,40 @@ const KeywordComponent = ({ keywordData }) => {
                                 {/* 선택한 키워드 뉴스 요약 */}
                                 <Row style={{marginBottom: '30px'}}>
                                     <Col>
-                                        <div style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
+                                        {/* <div style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
                                             요약
-                                        </div>
+                                        </div> */}
                                         <div style={{ fontSize: '20px' }}>
                                             {keywordDataState[selectedKeyword][0].news_summary}
                                         </div>
                                     </Col>
                                 </Row>
 
+                                <div class="divider div-transparent div-stopper"></div>
+
                                 {/* 선택한 키워드의 타이틀과 링크 */}
-                                <Row style={{marginBottom: '20px'}}>
-                                    <Col>
-                                        <div style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
-                                            요약에 사용된 기사
-                                        </div>
+                                <Row style={{ marginBottom: '20px' }}>
+                                    <Col className="text-left">
                                         {keywordDataState[selectedKeyword][0].title.map((title, index) => (
-                                            <div key={index} style={{ fontSize: '18px' }}>
-                                                <a href={keywordDataState[selectedKeyword][0].link[index]} target="_blank" rel="noopener noreferrer">{title}</a>
+                                            <div key={index} style={{ fontSize: '18px', color: '#6a6b6d', marginBottom: '10px', transition: 'color 0.3s' }}>
+                                                <a
+                                                    href={keywordDataState[selectedKeyword][0].link[index]}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    style={{ color: 'inherit', textDecoration: 'none' }}
+                                                    onMouseEnter={(e) => e.target.style.color = 'blue'}
+                                                    onMouseLeave={(e) => e.target.style.color = '#6a6b6d'}
+
+                                                >
+                                                    {title}
+                                                </a>
                                             </div>
                                         ))}
                                     </Col>
                                 </Row>
-                            </>
+                            </div>
                         )}
                     </Col>
-                    </div>
                 </Row>
             </Container>
         </div>

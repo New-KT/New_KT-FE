@@ -2,3 +2,8 @@
     max-width: 750px;
     margin: 0 auto;
 }
+
+.my-5 {
+    font-family: 'GowunBatang-Regular';
+    /* font-weight: bold; */
+}
