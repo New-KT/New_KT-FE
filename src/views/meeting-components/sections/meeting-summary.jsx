@@ -12,7 +12,8 @@ const MeetingSummary = () => {
         "회의 제목": "",
         "주요 이슈 및 진행상황": [],
         "새로운 상황 및 공지사항": [],
-        "추가 안건": []
+        "추가 안건": [],
+        'keywords': [],
     });
     
     // const [summary, setSummary] = useState({
@@ -58,9 +59,9 @@ const MeetingSummary = () => {
         });
     }, []);
 
-    if (loading) {
-        return <Loading />;
-    }
+    // if (loading) {
+    //     return <Loading />;
+    // }
 
     return (
         <div id="page">
@@ -99,7 +100,7 @@ const MeetingSummary = () => {
                 <Row>
                     <h2 class="block2-author">Today's Keyword</h2>
                     <blockquote class="block2">
-                        Keyword 주세요
+                        {summary.keywords.join(' ')}
                     </blockquote>
                 </Row>
             </Container>
