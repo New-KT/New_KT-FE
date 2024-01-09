@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'SunBatang-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal, bold;
+    font-style: normal;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+#keywordPage {
+    font-family: 'GowunBatang-Regular';
+    font-weight: bold;
+}
+
+
+.note {
+    position: relative;
+    width: 60%;
+    padding: 1.2em 1.5em;
+    margin: 2em auto;
+    color: #fff;
+    background: #2ecc71;
+    overflow: hidden
+}
+
+.note.orange {
+    background: #f39c12;
+}
+
+.note:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: #fff #fff #27ae60 #27ae60;
+    background: #27ae60;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+    display: block;
+    width: 0
+  }
+
+.note.orange:before {
+    border-color: #fff #fff #e67e22 #e67e22;
+    background: #e67e22;
+  }
