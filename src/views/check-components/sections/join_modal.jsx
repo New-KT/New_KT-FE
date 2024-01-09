@@ -58,7 +58,7 @@ const TermsModal = ({ isOpen, toggleModal, onConfirm }) => {
     };
 
     return (
-        <Modal isOpen={isOpen} toggle={toggleModal}>
+        <Modal isOpen={isOpen} toggle={toggleModal} style={{ color:"black" }}>
             <ModalHeader toggle={toggleModal}>약관 및 조건</ModalHeader>
             <ModalBody>
                 <FormGroup check>
