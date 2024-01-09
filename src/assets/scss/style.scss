@@ -21,10 +21,40 @@ File: scss
 @import 'variable';
 // @import 'bootstrap/bootstrap.scss';
 @import "~bootstrap/scss/bootstrap";
-@import '../scss/icons/font-awesome/css/font-awesome.min.css'; 
+@import '../scss/icons/font-awesome/css/font-awesome.min.css';
 @import '../scss/icons/simple-line-icons/css/simple-line-icons.css';
 @import '../scss/icons/themify-icons/themify-icons.css';
-@import 'ui/ui.scss'; 
-@import 'app.scss'; 
-@import 'common.scss'; 
-@import 'responsive.scss';     
+@import 'ui/ui.scss';
+@import 'app.scss';
+@import 'common.scss';
+@import 'responsive.scss';
+
+
+.m-center-30 {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+
+    i {
+        margin-right: 10px;
+    }
+}
+
+.service_item {
+    i.icofont-light-bulb {
+        /* 아이콘 스타일링 추가 */
+    }
+
+    h6.m-top-30 {
+        /* h6 스타일링 추가 */
+    }
+
+    .separator_small {
+        /* separator_small 스타일링 추가 */
+    }
+
+    p {
+        /* p 스타일링 추가 */
+    }
+}

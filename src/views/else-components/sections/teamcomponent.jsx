@@ -6,11 +6,18 @@ const TeamComponent = () => {
     return (
         <div>
             <div className="spacer bg-light">
-                <Container>
-                    <Row className="justify-content-center">
-                        <Col md="7" className="text-center">
+                <Container style={{ width: "80%" }}>
+                    <Row
+                        className="justify-content-center"
+                        style={{ marginBottom: "40px" }}
+                    >
+                        <Col
+                            md="7"
+                            className="text-center"
+                            style={{ marginLeft: "auto", marginRight: "auto" }}
+                        >
                             <h1
-                                className="title font-bold"
+                                className="title font-bold mx-auto"
                                 style={{ marginTop: "30px" }}
                             >
                                 서비스 소개
@@ -21,22 +28,79 @@ const TeamComponent = () => {
                             </h6>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md="12" className="text-center">
-                            {/* about 이미지를 배경으로 하는 div */}
-                            <div className="spacer team2">
-                                <Container>
-                                    <Row class="no-gutters m-2">
-                                        <Col className="pro-pic about"></Col>
-                                    </Row>
-                                </Container>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="service_item">
+                                <i class="icofont icofont-light-bulb"></i>
+                                <h4
+                                    class="m-center-30"
+                                    style={{
+                                        color: "navy",
+                                    }}
+                                >
+                                    <i class="fa fa-angle-double-right fa-2x"></i>{" "}
+                                    키워드 추출
+                                </h4>
+                                <div class="separator_small"></div>
+                                <p>
+                                    실시간 STT를 통해,  회의 내용 중 키워드를
+                                    <br></br>
+                                    추출합니다. 회의 중 모르거나 궁금할 만한
+                                    <br></br>
+                                    키워드를 선택합니다{" "}
+                                </p>
                             </div>
-                        </Col>
-                    </Row>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="service_item">
+                                <h4
+                                    class="m-center-30"
+                                    style={{
+                                        color: "navy",
+                                    }}
+                                >
+                                    <i class="fa fa-angle-double-right fa-2x"></i>{" "}
+                                    키워드 설명
+                                </h4>
+
+                                <div class="separator_small"></div>
+                                <p>
+                                    키워드에 대해 실시간 뉴스 내용을  반영하여
+                                    <br></br>
+                                    요약 및 설명합니다. 직접 검색해보지 않아도
+                                    <br></br>
+                                    트렌드&설명을  한 눈에 확인 가능합니다.{" "}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="service_item">
+                                <i class="icofont icofont-video"></i>
+                                <h4
+                                    class="m-center-30"
+                                    style={{
+                                        color: "navy",
+                                    }}
+                                >
+                                    <i class="fa fa-angle-double-right fa-2x"></i>{" "}
+                                    회의 요약
+                                </h4>
+                                <div class="separator_small"></div>
+                                <p>
+                                    회의가 끝나면 전체 회의에 대한  회의록을
+                                    <br></br>
+                                    제공합니다. 회의 성격, 회사의 회의록 형식에
+                                    <br></br>
+                                    따라 커스텀 할 수 있습니다.{" "}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </Container>
             </div>
             <div className="spacer team2">
-                <Container style={{ width: "75%" }}>
+                <Container style={{ width: "70%" }}>
                     <Row className="justify-content-center">
                         <Col md="7" className="text-center">
                             <h2
@@ -69,12 +133,12 @@ const TeamComponent = () => {
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-facebook"></i>
+                                                    <i className="fa fa-github"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-twitter"></i>
+                                                    <i className="fa fa-envelope-o"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
@@ -105,12 +169,12 @@ const TeamComponent = () => {
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-facebook"></i>
+                                                    <i className="fa fa-github"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-twitter"></i>
+                                                    <i className="fa fa-envelope-o"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
@@ -141,12 +205,12 @@ const TeamComponent = () => {
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-facebook"></i>
+                                                    <i className="fa fa-github"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-twitter"></i>
+                                                    <i className="fa fa-envelope-o"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
@@ -174,17 +238,17 @@ const TeamComponent = () => {
                     <Row className="px-5">
                         <Col lg="4" md="6" className="m-b-30">
                             <Row className="no-gutters m-2">
-                                <Col md="12" className="col-md-12 pro-pic t5">
+                                <Col md="12" className="col-md-12 pro-pic t4">
                                     <div className="card-img-overlay">
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-facebook"></i>
+                                                    <i className="fa fa-github"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-twitter"></i>
+                                                    <i className="fa fa-envelope-o"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
@@ -210,17 +274,17 @@ const TeamComponent = () => {
                         </Col>
                         <Col lg="4" md="6" className="m-b-30">
                             <Row className="no-gutters m-2">
-                                <Col md="12" className="col-md-12 pro-pic t6">
+                                <Col md="12" className="col-md-12 pro-pic t5">
                                     <div className="card-img-overlay">
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-facebook"></i>
+                                                    <i className="fa fa-github"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-twitter"></i>
+                                                    <i className="fa fa-envelope-o"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
@@ -246,17 +310,17 @@ const TeamComponent = () => {
                         </Col>
                         <Col lg="4" md="6" className="m-b-30">
                             <Row className="no-gutters m-2">
-                                <Col md="12" className="col-md-12 pro-pic t7">
+                                <Col md="12" className="col-md-12 pro-pic t6">
                                     <div className="card-img-overlay">
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-facebook"></i>
+                                                    <i className="fa fa-github"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
                                                 <a href="#">
-                                                    <i className="fa fa-twitter"></i>
+                                                    <i className="fa fa-envelope-o"></i>
                                                 </a>
                                             </li>
                                             <li className="list-inline-item">
