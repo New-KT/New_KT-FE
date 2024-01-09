@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 
 import Loading from "./loading.jsx";
+import '../css/meeting-summary.css';
 
 const MeetingSummary = () => {
     const [loading, setLoading] = useState(true);
@@ -34,27 +35,27 @@ const MeetingSummary = () => {
     // });
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/token/meetingSummary", {
+        fetch("http://127.0.0.1:8000/meeting/meetsum", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${window.localStorage.getItem('token')}`,
             },
         })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! Status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then((data) => {
-                setSummary(data);
-                setLoading(false);
-                console.log("data:", data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            return res.json();
+        })
+        .then((data) => {
+            setSummary(data);
+            setLoading(false);
+            console.log("data:", data);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
     }, []);
 
     if (loading) {
@@ -62,32 +63,47 @@ const MeetingSummary = () => {
     }
 
     return (
-        <Container style={{ marginTop: '40px', marginBottom: '20px', color: 'black'}}>
-            <Row>
-                <h1 style={{ fontWeight: 'bold', marginBottom: '20px' }}>{summary["회의 제목"]}</h1>
-                
-                <p className="fs-3 fw-semibold" style={{ marginTop: '5px' }}>주요 이슈 및 진행상황:</p>
-                <ul>
-                    {summary["주요 이슈 및 진행상황"].map((issue, index) => (
-                        <li key={index}>{issue}</li>
-                    ))}
-                </ul>
-                
-                <p className="fs-3 fw-semibold" style={{ marginTop: '10px' }}>새로운 상황 및 공지사항:</p>
-                <ul>
-                    {summary["새로운 상황 및 공지사항"].map((notice, index) => (
-                        <li key={index}>{notice}</li>
-                    ))}
-                </ul>
-                
-                <p className="fs-3 fw-semibold" style={{ marginTop: '10px' }}>추가 안건:</p>
-                <ul>
-                    {summary["추가 안건"].map((agenda, index) => (
-                        <li key={index}>{agenda}</li>
-                    ))}
-                </ul>
-            </Row>
-        </Container>
+        <div id="page">
+            <Container style={{ marginTop: '40px', marginBottom: '20px', color: 'black'}}>
+                <Row>
+                    <h1 style={{ fontWeight: 'bold', marginBottom: '60px' }}>{summary["회의 제목"]}</h1>
+                    
+                    <p className="fs-3 fw-semibold" style={{ marginTop: '5px' }}>주요 이슈 및 진행상황:</p>
+                    <blockquote class="block1">
+                        <ul>
+                            {summary["주요 이슈 및 진행상황"].map((issue, index) => (
+                                <li key={index}>{issue}</li>
+                            ))}
+                        </ul>
+                    </blockquote>
+                    
+                    <p className="fs-3 fw-semibold" style={{ marginTop: '30px' }}>새로운 상황 및 공지사항:</p>
+                    <blockquote class="block1">
+                        <ul>
+                            {summary["새로운 상황 및 공지사항"].map((notice, index) => (
+                                <li key={index}>{notice}</li>
+                            ))}
+                        </ul>
+                    </blockquote>
+                    
+                    <p className="fs-3 fw-semibold" style={{ marginTop: '30px' }}>추가 안건:</p>
+                    <blockquote class="block1">
+                        <ul>
+                            {summary["추가 안건"].map((agenda, index) => (
+                                <li key={index}>{agenda}</li>
+                            ))}
+                        </ul>
+                    </blockquote>
+                </Row>
+                <hr />
+                <Row>
+                    <h2 class="block2-author">Today's Keyword</h2>
+                    <blockquote class="block2">
+                        Keyword 주세요
+                    </blockquote>
+                </Row>
+            </Container>
+        </div>
     );
 };
 
