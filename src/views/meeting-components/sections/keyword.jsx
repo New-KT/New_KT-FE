@@ -57,7 +57,7 @@ const KeywordComponent = ({ keywordData }) => {
     
     return (
         <div id="keywordPage">
-            <Container style={{ maxHeight: 'auto', overflowY: 'auto' }}>
+            <Container style={{ maxHeight: 'auto', overflowY: 'auto', height: '700px' }}>
                 <Row style={{marginTop: '30px'}}>
                     <Col>
                         {/* 왼쪽에 키워드 목록 표시 */}
