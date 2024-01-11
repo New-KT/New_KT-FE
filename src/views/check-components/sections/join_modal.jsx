@@ -144,7 +144,7 @@ const TermsModal = ({ isOpen, toggleModal, onConfirm }) => {
                             checked={agreements.serviceAgreed}
                             onChange={handleAgreementChange}
                         />
-                        [선택] 서비스 알림 수신 동의
+                        [선택] 이벤트, 뉴스 정보 수신 동의
                     </Label>
                 </FormGroup>
                 {/* Add more checkboxes as needed */}
