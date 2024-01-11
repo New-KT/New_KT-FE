@@ -47,8 +47,8 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
         }
     
         formData.append("title", eventTitle);
-        formData.append("start", meeting ? `${startEventDate}T${startTime}:00` : `${startEventDate}T00:00:00`);
-        formData.append("end", meeting ? `${startEventDate}T${endTime}:00` : `${endEventDate}T00:00:00`);
+        formData.append("start", meeting ? `${startEventDate}T${startTime}:00` : `${startEventDate}T09:00:00`);
+        formData.append("end", meeting ? `${startEventDate}T${endTime}:00` : `${endEventDate}T18:00:00`);
         formData.append("memo", eventMemo);
         formData.append("meeting", meeting);
     
@@ -95,7 +95,7 @@ const AddEventModal = ({ isOpen, onClose, onSave }) => {
     return (
         <Modal isOpen={isOpen} toggle={onClose}>
             <ModalHeader toggle={onClose}>
-                <div className="fs-4 fw-semibold">일정 추가</div>
+                <div className="fs-4 fw-semibold">일정 등록</div>
             </ModalHeader>
 
             <ModalBody>
