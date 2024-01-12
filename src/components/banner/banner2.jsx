@@ -31,10 +31,10 @@ const HeaderBanner2 = () => {
     // const [schedule, setSchedule] = useState([
     //     {
     //         id: 1,
-    //         title: "반별미팅",
-    //         start: "2024-01-16T14:00:00",
-    //         end: "2024-01-16T15:00:00",
-    //         memo: "test",
+    //         title: "회의",
+    //         start: "2024-01-11T14:00:00",
+    //         end: "2024-01-11T15:00:00",
+    //         memo: "KT AIVLE 15조 파이팅!",
     //     },
     // ]);
 
